@@ -1,16 +1,16 @@
 #include <iostream>
 #include <string>
-#include <chrono>
 #include "Locatie.h"
 #include "Eveniment.h"
 //------------------------------------------------TESTING------------------------------------------------
 int main() {
 	cout << "Ticketing App";
 	int nrOptiune = 0;
-	while (nrOptiune != 2) { 
+	while (nrOptiune != 3) { 
 		cout << endl << "==============================";
 		cout << endl << "1-Introducere Eveniment";
-		cout << endl << "2-exit";
+		cout << endl << "2-Modificare evenimente";
+		cout << endl << "3-exit";
 		cout << endl << "Introduceti actiunea dorita: "; cin >> nrOptiune;
 		if (nrOptiune == 1) {
 			int zi=0, luna=0, an=0;
@@ -51,9 +51,21 @@ int main() {
 			else
 				data = to_string(zi) + "/" + to_string(luna) + "/" + to_string(an);
 			Eveniment* ev = new Eveniment(data);
-			cout << ev->locatie;
+			cin >> *ev;
+			cout << *ev;
+			ev->afisareOraSfarsit();
 		}
-		
+		else if (nrOptiune == 2) {
+			int nrOptiune3 = 0;
+			while (nrOptiune3 != 9) {
+				cout << endl << "1-Modificare oras eveniment";
+				cout << endl << "2-Modificare strada eveniment";
+				cout << endl << "3-Modificare capacitate totala eveniment";
+				cout << endl << "4-Modificare numar locuri eveniment";
+				cout << endl << "5-Modificare capacitate totala eveniment";
+				cout << endl << "Introduceti actiunea dorita: "; cin >> nrOptiune3;
+			}
+		}
 	}
 	return 0;
 }

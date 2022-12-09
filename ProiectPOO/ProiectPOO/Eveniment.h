@@ -9,8 +9,7 @@ public:
 	string data;
 	int oraIncepere;
 	int minut;
-	int* oraSfarsit;
-	int* minutSfarsit;
+	int durata;
 	Locatie locatie;
 public:
 	Eveniment();
@@ -20,8 +19,17 @@ public:
 	void setDenumireEveniment(const char*);
 	string getData() const;
 	//void setData(string);
+	int getOraIncepere() const;
+	void setOraIncepere(int);
+	int getDurata() const;
+	void setDurata(int);
+	int getMinut() const;
+	void setMinut(int);
 	~Eveniment();
 	Eveniment& operator=(const Eveniment&);
+	friend ostream& operator<<(ostream&, const Eveniment&);
+	friend istream& operator>>(istream&, Eveniment&);
+	void afisareOraSfarsit() const;
 	friend class Locatie;
 };
 

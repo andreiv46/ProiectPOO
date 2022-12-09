@@ -14,11 +14,11 @@ public:
 	Locatie();
 	Locatie(string, string,int, int, string);
 	Locatie(const Locatie&);
-    string getOras();
-	string getStrada();
-	int getCapacitateTotala();
-	int getNrMaximLocuri();
-	string getDenumireLocatie();
+    string getOras() const;
+	string getStrada() const;
+	int getCapacitateTotala() const;
+	int getNrMaximLocuri() const;
+	string getDenumireLocatie() const;
 	void setOras(string);
 	void setStrada(string);
 	void setNrMaximLocuri(int);

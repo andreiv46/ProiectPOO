@@ -5,8 +5,7 @@ Eveniment::Eveniment() {
 	this->data = "Necunoscuta";
 	this->oraIncepere = 0;
 	this->minut = 0;
-	this->oraSfarsit = nullptr;
-	this->minutSfarsit = nullptr;
+	this->durata = 0;
 }
 //Eveniment::Eveniment(const char* denumireEveniment, string data, int oraIncepere, int minut, int* oraSfarsit, int* minutSfarsit) {
 //	if (denumireEveniment != nullptr && strlen(denumireEveniment) > 0)
@@ -23,10 +22,7 @@ Eveniment::Eveniment(const Eveniment& e) {
 	this->data = e.data;
 	this->oraIncepere = e.oraIncepere;
 	this->minut = e.minut;
-	this->oraSfarsit = new int;
-	*this->oraSfarsit = *e.oraSfarsit;
-	this->minutSfarsit = new int;
-	*this->minutSfarsit = *e.minutSfarsit;
+	this->durata = 0;
 	this->locatie = e.locatie;
 }
 char* Eveniment::getDenumireEveniment() const {
@@ -52,6 +48,14 @@ string Eveniment::getData() const{
 //void Eveniment::setData(string data) {
 //	if(data.length() > 0)
 //}
+int Eveniment::getOraIncepere() const {
+	return this->oraIncepere;
+}
+void Eveniment::setOraIncepere(int oraIncepere) {
+	if (oraIncepere >= 0 && oraIncepere <= 24)
+		this->oraIncepere = oraIncepere;
+}
+
 Eveniment& Eveniment::operator=(const Eveniment& e) {
 	if (this != &e) {
 		if (this->denumireEveniment != NULL)
@@ -61,14 +65,7 @@ Eveniment& Eveniment::operator=(const Eveniment& e) {
 		this->data = e.data;
 		this->oraIncepere = e.oraIncepere;
 		this->minut = e.minut;
-		if (this->oraSfarsit != NULL)
-			delete this->oraSfarsit;
-		this->oraSfarsit = new int;
-		*this->oraSfarsit = *e.oraSfarsit;
-		if (this->minutSfarsit != NULL)
-			delete this->minutSfarsit;
-		this->minutSfarsit = new int;
-		*this->minutSfarsit = *e.minutSfarsit;
+		this->durata = e.durata;
 		this->locatie = e.locatie;
 	}
 	return *this;
@@ -78,12 +75,87 @@ Eveniment::~Eveniment() {
 		delete[] this->denumireEveniment;
 		this->denumireEveniment = nullptr;
 	}
-	if (this->oraSfarsit != nullptr) {
-		delete[] this->oraSfarsit;
-		this->oraSfarsit = nullptr;
+}
+int Eveniment::getDurata() const {
+	return this->durata;
+}
+void Eveniment::setDurata(int durata) {
+	if (durata >= 0 && durata <= 1440)
+		this->durata = durata;
+}
+int Eveniment::getMinut() const {
+	return this->minut;
+}
+void Eveniment::setMinut(int minut) {
+	if (minut >= 0 && minut <= 60)
+		this->minut = minut;
+}
+void Eveniment::afisareOraSfarsit() const {
+	int oraInMinute = this->oraIncepere * 60 + this->minut;
+	int oraSfarsit = 0;
+	if (oraInMinute + this->durata > 1440)
+		oraSfarsit = oraInMinute + this->durata - 1440;
+	else
+		oraSfarsit = oraInMinute + this->durata;
+	//cout << "Ora de sfarsit a evenimentului este: " << oraSfarsit / 60 << ":" << oraSfarsit % 60 << endl;
+	if (oraSfarsit/60 == 0 && oraSfarsit % 60 == 0)
+		cout << "Ora incepere: 00:00" << endl;
+	else if (oraSfarsit / 60 < 10 && oraSfarsit % 60 < 10)
+		cout << "Ora incepere: 0" << oraSfarsit / 60 << ":0" << oraSfarsit % 60 << endl;
+	else if (oraSfarsit / 60 < 10 && oraSfarsit % 60 >= 10)
+		cout << "Ora incepere: 0" << oraSfarsit / 60 << ":" << oraSfarsit % 60 << endl;
+	else if (oraSfarsit / 60 >= 10 && oraSfarsit % 60 < 10)
+		cout << "Ora incepere: " << oraSfarsit / 60 << ":0" << oraSfarsit % 60 << endl;
+	else
+		cout << "Ora incepere: " << oraSfarsit / 60 << ":" << oraSfarsit % 60 << endl;
+}
+ostream& operator<<(ostream& out, const Eveniment& e) {
+	out << endl;
+	out << "===================" << endl;
+	out << "Evenimentul" << endl;
+	out << "Denumire eveniment: " << e.denumireEveniment << endl;
+	out << "Data: " << e.data << endl;
+	if (e.oraIncepere == 0 && e.minut == 0)
+		out << "Ora incepere: 00:00" << endl;
+	else if (e.oraIncepere < 10 && e.minut < 10)
+		out << "Ora incepere: 0" << e.oraIncepere << ":0" << e.minut << endl;
+	else if (e.oraIncepere < 10 && e.minut >= 10)
+		out << "Ora incepere: 0" << e.oraIncepere << ":" << e.minut << endl;
+	else if (e.oraIncepere >= 10 && e.minut < 10)
+		out << "Ora incepere: " << e.oraIncepere << ":0" << e.minut << endl;
+	else
+		out << "Ora incepere: " << e.oraIncepere << ":" << e.minut << endl;
+	if (e.durata > 60 && e.durata % 60 == 0)
+		out << "Durata: " << e.durata / 60 << " ore" << endl;
+	else if (e.durata > 60 && e.durata % 60 != 0)
+		out << "Durata: " << e.durata / 60 << " ore si " << e.durata % 60 << " minute" << endl;
+	else if(e.durata < 60)
+		out << "Durata: " << e.durata << " minute" << endl;
+	out << endl;
+	out << e.locatie;
+	return out;
+}
+istream& operator>>(istream& in, Eveniment& e) {
+	cout << "Introduceti numele evenimentului: "; 
+	ws(in);
+	string denEvent;
+	getline(in, denEvent);
+	e.setDenumireEveniment(denEvent.c_str());
+	cout << "Introduceti ora incepere (HH:MM): ";
+	in >> e.oraIncepere >> e.minut;
+	while (e.oraIncepere < 0 || e.oraIncepere > 24 || e.minut < 0 || e.minut > 60) {
+		cout << "Ora incepere invalida, incercati din nou (HH:MM):  ";
+		in >> e.oraIncepere >> e.minut;
 	}
-	if (this->minutSfarsit != nullptr) {
-		delete[] this->minutSfarsit;
-		this->minutSfarsit = nullptr;
+	int ore, minute;
+	cout << "Introduceti durata evenimentului (ore:minute): ";
+	in >> ore >> minute;
+	e.durata = ore * 60 + minute;
+	while (e.durata < 0 || e.durata > 1440 || ore < 0 || minute < 0 || minute > 60 || ore > 24) {
+		cout << "Durata invalida, incercati din nou (ore:minute): ";
+		in >> ore >> minute;
+		e.durata = ore * 60 + minute;
 	}
+	in >> e.locatie;
+	return in;
 }

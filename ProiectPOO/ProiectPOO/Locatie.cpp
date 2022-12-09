@@ -25,23 +25,30 @@ Locatie::Locatie(const Locatie& l) {
 	this->nrMaximLocuri = l.nrMaximLocuri;
 	this->denumireLocatie = l.denumireLocatie;
 }
-string Locatie::getOras() {
+string Locatie::getOras() const{
     return this->oras;
 }
-string Locatie::getStrada() {
+string Locatie::getStrada() const{
     return this->strada;
 }
-int Locatie::getNrMaximLocuri() {
+int Locatie::getNrMaximLocuri() const{
 	return this->nrMaximLocuri;
 }
-string Locatie::getDenumireLocatie() {
+string Locatie::getDenumireLocatie() const{
     return this->denumireLocatie;
 }
-int Locatie::getCapacitateTotala() {
+int Locatie::getCapacitateTotala() const{
 	return this->capacitateTotala;
 }
 void Locatie::setCapacitateTotala(int capacitateaTotala) {
-	this->capacitateTotala = capacitateaTotala;
+	if (capacitateaTotala > 0) {
+		if (capacitateaTotala < this->nrMaximLocuri) {
+			cout << "Capacitatea este mai mica decat numarul de locuri disponibile" << endl;
+		}
+		else {
+			this->capacitateTotala = capacitateaTotala;
+		}
+	}
 }
 void Locatie::setOras(string oras) {
 	if (oras.length() > 0)
@@ -64,6 +71,7 @@ float Locatie::rataOcupareLocatie() {
 		return ((float)this->nrMaximLocuri / this->capacitateTotala) * 100;
 }
 ostream& operator<<(ostream& out,const Locatie &l) {
+	out << "======================" << endl;
 	out << "Locatia evenimentului" << endl;
 	out << "Orasul: " << l.oras << endl;
 	out << "Strada: " << l.strada << endl;
@@ -75,7 +83,8 @@ ostream& operator<<(ostream& out,const Locatie &l) {
 istream& operator>>(istream& in, Locatie& l)
 {
 	cout << "Introduceti orasul: ";
-	in >> l.oras;
+	ws(in);
+	getline(in, l.oras);
 	cout << "Introduceti strada: ";
 	ws(in);
 	getline(in, l.strada);
