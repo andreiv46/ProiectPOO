@@ -7,22 +7,28 @@ class Locatie
 private:
 	string oras;
 	string strada;
+	int capacitateTotala;
 	int nrMaximLocuri;
 	string denumireLocatie;
 public:
 	Locatie();
-	Locatie(string, string, int, string);
+	Locatie(string, string,int, int, string);
 	Locatie(const Locatie&);
     string getOras();
 	string getStrada();
+	int getCapacitateTotala();
 	int getNrMaximLocuri();
 	string getDenumireLocatie();
 	void setOras(string);
 	void setStrada(string);
 	void setNrMaximLocuri(int);
 	void setDenumireLocatie(string);
+	void setCapacitateTotala(int);
+	float rataOcupareLocatie();
 	friend ostream& operator<<(ostream& out,const Locatie &l);
 	friend istream& operator>>(istream& in, Locatie& l);
+	Locatie& operator+=(int);
+	bool operator<(Locatie& l);
 	friend class Eveniment;
 };
 
