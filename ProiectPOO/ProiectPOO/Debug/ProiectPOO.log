@@ -1,6 +1,2 @@
 ﻿  Eveniment.cpp
-  Locatie.cpp
-  main.cpp
-  Generating Code...
-D:\Github\ProiectPOO\ProiectPOO\ProiectPOO\Locatie.cpp(65): warning C4715: 'Locatie::rataOcupareLocatie': not all control paths return a value
   ProiectPOO.vcxproj -> D:\Github\ProiectPOO\ProiectPOO\Debug\ProiectPOO.exe

@@ -93,15 +93,22 @@ istream& operator>>(istream& in, Locatie& l)
 	getline(in, l.denumireLocatie);
 	cout << "Introduceti capacitatea locatiei: ";
 	in >> l.capacitateTotala;
+	while (in.fail() || l.capacitateTotala <= 0)
+	{
+		in.clear();
+		in.ignore(256, '\n');
+		cout << "Numar invalid, introduceti din nou: ";
+		in >> l.capacitateTotala;
+	}
 	l.nrMaximLocuri = 0;
 	cout << "Introduceti numarul maxim de locuri: ";
 	in >> l.nrMaximLocuri;
-	if (l.nrMaximLocuri > l.capacitateTotala)
-		while (l.nrMaximLocuri > l.capacitateTotala) {
-			cout << "Depaseste capacitatea totala! ";
-			cout << endl << "Introduceti numarul maxim de locuri: ";
-			in >> l.nrMaximLocuri;
-		}
+	while (in.fail() || l.nrMaximLocuri > l.capacitateTotala || l.nrMaximLocuri <= 0){
+		in.clear();
+		in.ignore(256, '\n');
+		cout << "Depaseste cpacitatea locatiei sau este invalid, introduceti din nou: ";
+		in >> l.nrMaximLocuri;
+	}
 	return in;
 }
 Locatie& Locatie::operator+=(int nrLocuri) {

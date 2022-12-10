@@ -1,16 +1,16 @@
 #pragma once
 #include "Locatie.h"
 #include <iostream>
+#include <iomanip>
 using namespace std;
 class Eveniment
 {
-public:
+private:
 	char* denumireEveniment;
 	string data;
-	int oraIncepere;
-	int minut;
-	int durata;
-	Locatie locatie;
+	string oraIncepere;
+	string durata;
+	Locatie* locatie = nullptr;
 public:
 	Eveniment();
 	Eveniment(string);
@@ -19,17 +19,17 @@ public:
 	void setDenumireEveniment(const char*);
 	string getData() const;
 	//void setData(string);
-	int getOraIncepere() const;
-	void setOraIncepere(int);
-	int getDurata() const;
-	void setDurata(int);
-	int getMinut() const;
-	void setMinut(int);
+	string getOraIncepere() const;
+	//void setOraIncepere(int);
+	string getDurata() const;
+	//void setDurata(int);
 	~Eveniment();
 	Eveniment& operator=(const Eveniment&);
 	friend ostream& operator<<(ostream&, const Eveniment&);
 	friend istream& operator>>(istream&, Eveniment&);
 	void afisareOraSfarsit() const;
+	bool operator!=(const Eveniment&);
+	bool operator!();
 	friend class Locatie;
 };
 

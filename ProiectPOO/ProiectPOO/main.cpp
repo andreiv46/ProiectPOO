@@ -6,12 +6,15 @@
 int main() {
 	cout << "Ticketing App";
 	int nrOptiune = 0;
-	while (nrOptiune != 3) { 
-		cout << endl << "==============================";
-		cout << endl << "1-Introducere Eveniment";
-		cout << endl << "2-Modificare evenimente";
-		cout << endl << "3-exit";
-		cout << endl << "Introduceti actiunea dorita: "; cin >> nrOptiune;
+	cout << endl << "==============================";
+	cout << endl << "1-Introducere Eveniment";
+	cout << endl << "2-Modificare evenimente";
+	cout << endl << "3-exit";
+	cout << endl << "Introduceti actiunea dorita: "; cin >> nrOptiune;
+	while (cin.fail() || nrOptiune != 3) { 
+		cin.clear();
+		//getchar();
+		cin.ignore(256, '\n');
 		if (nrOptiune == 1) {
 			int zi=0, luna=0, an=0;
 			string data;
@@ -53,6 +56,8 @@ int main() {
 			Eveniment* ev = new Eveniment(data);
 			cin >> *ev;
 			cout << *ev;
+			Eveniment* ev2 = new Eveniment(*ev);
+			cout << *ev2;
 			ev->afisareOraSfarsit();
 		}
 		else if (nrOptiune == 2) {
@@ -66,6 +71,11 @@ int main() {
 				cout << endl << "Introduceti actiunea dorita: "; cin >> nrOptiune3;
 			}
 		}
+		cout << endl << "==============================";
+		cout << endl << "1-Introducere Eveniment";
+		cout << endl << "2-Modificare evenimente";
+		cout << endl << "3-exit";
+		cout << endl << "Introduceti actiunea dorita: "; cin >> nrOptiune;
 	}
 	return 0;
 }
