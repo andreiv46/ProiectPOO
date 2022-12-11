@@ -10,6 +10,7 @@ private:
 	string data;
 	string oraIncepere;
 	string durata;
+	int nrLocuri;
 	Locatie* locatie = nullptr;
 public:
 	Eveniment();
@@ -23,13 +24,19 @@ public:
 	//void setOraIncepere(int);
 	string getDurata() const;
 	//void setDurata(int);
+	int getNrLocuri() const;
+	void setNrLocuri(int);
+	Locatie* getLocatie() const;
+	void setLocatie(Locatie*);
 	~Eveniment();
 	Eveniment& operator=(const Eveniment&);
 	friend ostream& operator<<(ostream&, const Eveniment&);
 	friend istream& operator>>(istream&, Eveniment&);
 	void afisareOraSfarsit() const;
+	//void scadereNrLocuri(int);
 	bool operator!=(const Eveniment&);
 	bool operator!();
 	friend class Locatie;
 };
+
 

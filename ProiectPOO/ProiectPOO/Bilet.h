@@ -5,13 +5,16 @@
 class Bilet
 {
 private:
-	int idBilet;
+	const int idBilet;
 	static int nrBilete;
-	//int tipEveniment;
 	float pretBilet;
 	Eveniment* eveniment = nullptr;
 public:
 	Bilet();
+	Bilet(Eveniment*, int);
+	Bilet(const Bilet&);
+	Bilet& operator=(const Bilet&);
+	~Bilet();
+	friend ostream& operator<<(ostream&, const Bilet&);
 };
-int Bilet::nrBilete = 0;
 

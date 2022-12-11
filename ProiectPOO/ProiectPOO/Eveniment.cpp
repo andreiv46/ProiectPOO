@@ -5,6 +5,8 @@ Eveniment::Eveniment() {
 	this->data = "Necunoscuta";
 	this->oraIncepere = "Necunoscuta";
 	this->durata = "Necunoscuta";
+	this->nrLocuri = 0;
+	this->locatie = new Locatie();
 }
 Eveniment::Eveniment(string data):Eveniment() {
 	this->data = data;
@@ -14,6 +16,7 @@ Eveniment::Eveniment(const Eveniment& e) {
 	this->denumireEveniment = new char[strlen(e.denumireEveniment) + 1];
 	strcpy_s(this->denumireEveniment, strlen(e.denumireEveniment) + 1, e.denumireEveniment);
 	this->data = e.data;
+	this->nrLocuri = e.nrLocuri;
 	this->oraIncepere = e.oraIncepere;
 	this->durata = "Necunoscuta";
 	this->locatie = new Locatie(*e.locatie);
@@ -48,7 +51,13 @@ string Eveniment::getOraIncepere() const {
 //	if (oraIncepere >= 0 && oraIncepere <= 24)
 //		this->oraIncepere = oraIncepere;
 //}
-
+int Eveniment::getNrLocuri() const {
+	return this->nrLocuri;
+}
+void Eveniment::setNrLocuri(int nrLocuri) {
+	if (nrLocuri >= 0 && nrLocuri <= locatie->getCapacitateTotala())
+		this->nrLocuri = nrLocuri;
+}
 Eveniment& Eveniment::operator=(const Eveniment& e) {
 	if (this != &e) {
 		if (this->denumireEveniment != NULL)
@@ -57,6 +66,7 @@ Eveniment& Eveniment::operator=(const Eveniment& e) {
 		strcpy_s(this->denumireEveniment, strlen(e.denumireEveniment) + 1, e.denumireEveniment);
 		this->data = e.data;
 		this->oraIncepere = e.oraIncepere;
+		this->nrLocuri = e.nrLocuri;
 		this->durata = e.durata;
 		if (this->locatie != NULL)
 			delete this->locatie;
@@ -81,6 +91,25 @@ string Eveniment::getDurata() const {
 //	if (durata >= 0 && durata <= 1440)
 //		this->durata = durata;
 //}
+Locatie* Eveniment::getLocatie() const {
+	if (this->locatie != nullptr) {
+		Locatie* copie = new Locatie(*this->locatie);
+		return copie;
+	}
+	else
+		return nullptr;
+}
+void Eveniment::setLocatie(Locatie* locatie) {
+	if (locatie != nullptr) {
+		if (this->locatie != nullptr)
+			delete this->locatie;
+		this->locatie = new Locatie(*locatie);
+	}
+	else {
+		delete this->locatie;
+		this->locatie = nullptr;
+	}
+}
 void Eveniment::afisareOraSfarsit() const {
 	int oraIncepere = stoi(this->oraIncepere.substr(0, 2));
 	int minuteIncepere = stoi(this->oraIncepere.substr(3, 2));
@@ -117,11 +146,13 @@ ostream& operator<<(ostream& out, const Eveniment& e) {
 	out << "Data: " << e.data << endl;
 	out << "Ora incepere: " << e.oraIncepere << endl;
 	out << "Durata: " << e.durata << endl;
+	out << "Numar locuri: " << e.nrLocuri << endl;
 	out << endl;
 	out << *e.locatie;
 	return out;
 }
 istream& operator>>(istream& in, Eveniment& e) {
+	in >> *e.locatie;
 	cout << "Introduceti numele evenimentului: "; 
 	ws(in);
 	string denEvent;
@@ -167,7 +198,14 @@ istream& operator>>(istream& in, Eveniment& e) {
 			copieOra = to_string(ora.tm_hour) + ":" + to_string(ora.tm_min);
 		e.durata = copieOra;
 	}
-	in >> *e.locatie;
+	cout << "Introduceti numarul de locuri: ";
+	in >> e.nrLocuri;
+	while (in.fail() || e.nrLocuri <= 0 || e.nrLocuri > e.locatie->getCapacitateTotala()) {
+		in.clear();
+		in.ignore(256, '\n');
+		cout << "Numar invalid, introduceti din nou: ";
+		in >> e.nrLocuri;
+	}
 	return in;
 }
 bool Eveniment::operator!=(const Eveniment& e) {

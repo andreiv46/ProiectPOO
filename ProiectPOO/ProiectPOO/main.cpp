@@ -1,14 +1,18 @@
+#pragma warning(disable:4996)
 #include <iostream>
 #include <string>
+#include <fstream>
 #include "Locatie.h"
 #include "Eveniment.h"
+#include "Bilet.h"
 //------------------------------------------------TESTING------------------------------------------------
 int main() {
 	cout << "Ticketing App";
 	int nrOptiune = 0;
+	ofstream fout("evenimente.txt");
 	cout << endl << "==============================";
 	cout << endl << "1-Introducere Eveniment";
-	cout << endl << "2-Modificare evenimente";
+	cout << endl << "2-Rezervare Bilet";
 	cout << endl << "3-exit";
 	cout << endl << "Introduceti actiunea dorita: "; cin >> nrOptiune;
 	while (cin.fail() || nrOptiune != 3) { 
@@ -16,60 +20,47 @@ int main() {
 		//getchar();
 		cin.ignore(256, '\n');
 		if (nrOptiune == 1) {
-			int zi=0, luna=0, an=0;
-			string data;
-			cout << "Introduceti data evenimentului" << endl;
-			cout << "Introduceti anul: "; cin >> an;
-			while (an < 2023 || an > 2027) {
-				cout << "An invalid, incercati din nou: ";
-				cin >> an;
+			time_t now = time(0);
+			tm* ltm = localtime(&now);
+			int year = 1900 + ltm->tm_year;
+			int month = 1 + ltm->tm_mon;
+			int day = ltm->tm_mday;
+			struct tm data;
+			cout << "Introduceti data evenimentului (dd/mm/yyyy): ";
+			cin >> get_time(&data, "%d/%m/%Y");
+			while (cin.fail() || data.tm_year + 1900 < year || data.tm_year + 1900 == year && data.tm_mon + 1 < month || data.tm_year + 1900 == year && data.tm_mon + 1 == month && data.tm_mday < day)
+			{
+				cin.clear();
+				cin.ignore(256, '\n');
+				cout << "Data este invalida, incercati din nou (dd/mm/yyyy): ";
+				cin >> get_time(&data, "%d/%m/%Y");
 			}
-			cout << "Introduceti luna: "; cin >> luna;
-			while (luna < 1 || luna > 12) {
-				cout << "Luna invalida, incercati din nou: ";
-				cin >> luna;
-			}
-			cout << "Introduceti ziua: "; cin >> zi;
-			if(luna==1 || luna==3 || luna==5 || luna==7 || luna==8 || luna==10|| luna==12)
-				while (zi < 1 || zi>31) {
-					cout << "Zi invalida, incercati din nou: ";
-					cin >> zi;
-				}
-			else if (luna == 2)
-				while (zi < 1 || zi>28) {
-					cout << "Zi invalida, incercati din nou: ";
-					cin >> zi;
-				}
-			else 
-				while (zi < 1 || zi>30) {
-					cout << "Zi invalida, incercati din nou: ";
-					cin >> zi;
-				}
-			if (zi < 10 && luna < 10)
-				data = "0" + to_string(zi) + "/0" + to_string(luna) + "/" + to_string(an);
-			else if (zi < 10 && luna >= 10)
-				data = "0" + to_string(zi) + "/" + to_string(luna) + "/" + to_string(an);
-			else if (zi >= 10 && luna < 10)
-				data = to_string(zi) + "/0" + to_string(luna) + "/" + to_string(an);
+			string dataEveniment;
+			if (data.tm_mday < 10 && data.tm_mon + 1 < 10)
+				dataEveniment = "0" + to_string(data.tm_mday) + "/0" + to_string(data.tm_mon + 1) + "/" + to_string(data.tm_year + 1900);
+			else if (data.tm_mday < 10 && data.tm_mon + 1 >= 10)
+				dataEveniment = "0" + to_string(data.tm_mday) + "/" + to_string(data.tm_mon + 1) + "/" + to_string(data.tm_year + 1900);
+			else if (data.tm_mday >= 10 && data.tm_mon + 1 < 10)
+				dataEveniment = to_string(data.tm_mday) + "/0" + to_string(data.tm_mon + 1) + "/" + to_string(data.tm_year + 1900);
 			else
-				data = to_string(zi) + "/" + to_string(luna) + "/" + to_string(an);
-			Eveniment* ev = new Eveniment(data);
+				dataEveniment = to_string(data.tm_mday) + "/" + to_string(data.tm_mon + 1) + "/" + to_string(data.tm_year + 1900);
+			Eveniment* ev = new Eveniment(dataEveniment);
 			cin >> *ev;
-			cout << *ev;
-			Eveniment* ev2 = new Eveniment(*ev);
-			cout << *ev2;
+			//cout << *ev;
 			ev->afisareOraSfarsit();
+
+			//rezervare bilet
+			int id = ev->getNrLocuri() + 69;
+			Bilet* b = new Bilet(ev, id);
+			cout << *b;
+			cout << endl << "Biletul a fost rezervat cu succes!" << endl;
+			//cout << ev->getNrEvenimente();
 		}
 		else if (nrOptiune == 2) {
-			int nrOptiune3 = 0;
-			while (nrOptiune3 != 9) {
-				cout << endl << "1-Modificare oras eveniment";
-				cout << endl << "2-Modificare strada eveniment";
-				cout << endl << "3-Modificare capacitate totala eveniment";
-				cout << endl << "4-Modificare numar locuri eveniment";
-				cout << endl << "5-Modificare capacitate totala eveniment";
-				cout << endl << "Introduceti actiunea dorita: "; cin >> nrOptiune3;
-			}
+			cout << "===============";
+			cout << "Rezervare Bilet" << endl;
+			cout << "Introduceti evenimentul: ";
+			
 		}
 		cout << endl << "==============================";
 		cout << endl << "1-Introducere Eveniment";
