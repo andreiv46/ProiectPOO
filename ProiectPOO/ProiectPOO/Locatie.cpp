@@ -5,7 +5,7 @@ Locatie::Locatie() {
 	this->capacitateTotala = 0;
 	this->denumireLocatie = "Necunoscut";
 }
-Locatie::Locatie(string oras, string strada, int capacitateTotala, int nrMaximLocuri, string denumireLocatie):Locatie() {
+Locatie::Locatie(string oras, string strada, int capacitateTotala, string denumireLocatie):Locatie() {
 	if (oras.length() > 0)
 		this->oras = oras;
 	if (strada.length() > 0)

@@ -130,14 +130,17 @@
     <ClCompile Include="Bilet.cpp" />
     <ClCompile Include="Eveniment.cpp" />
     <ClCompile Include="Locatie.cpp" />
+    <ClCompile Include="Locuri.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Stadion.cpp" />
+    <ClCompile Include="Zona.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bilet.h" />
     <ClInclude Include="Eveniment.h" />
+    <ClInclude Include="functiimain.h" />
     <ClInclude Include="Locatie.h" />
-    <ClInclude Include="Stadion.h" />
+    <ClInclude Include="Locuri.h" />
+    <ClInclude Include="Zona.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

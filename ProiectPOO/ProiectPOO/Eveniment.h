@@ -11,11 +11,13 @@ private:
 	string oraIncepere;
 	string durata;
 	int nrLocuri;
+	float* preturi;
 	Locatie* locatie = nullptr;
 public:
 	Eveniment();
 	Eveniment(string);
 	Eveniment(const Eveniment&);
+	Eveniment(char*, string, string, string, int, Locatie);
 	char* getDenumireEveniment() const;
 	void setDenumireEveniment(const char*);
 	string getData() const;
@@ -37,6 +39,7 @@ public:
 	bool operator!=(const Eveniment&);
 	bool operator!();
 	friend class Locatie;
+	friend class Locuri;
 };
 
 

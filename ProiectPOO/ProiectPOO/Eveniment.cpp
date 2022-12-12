@@ -12,6 +12,15 @@ Eveniment::Eveniment(string data):Eveniment() {
 	this->data = data;
 	locatie = new Locatie();
 }
+Eveniment::Eveniment(char* denumireEveniment, string data, string oraIncepere, string durata, int nrLocuri, Locatie locatie) {
+	this->denumireEveniment = new char[strlen(denumireEveniment) + 1];
+	strcpy_s(this->denumireEveniment, strlen(denumireEveniment) + 1, denumireEveniment);
+	this->data = data;
+	this->oraIncepere = oraIncepere;
+	this->durata = durata;
+	this->nrLocuri = nrLocuri;
+	this->locatie = new Locatie(locatie);
+}
 Eveniment::Eveniment(const Eveniment& e) {
 	this->denumireEveniment = new char[strlen(e.denumireEveniment) + 1];
 	strcpy_s(this->denumireEveniment, strlen(e.denumireEveniment) + 1, e.denumireEveniment);

@@ -8,20 +8,18 @@ private:
 	string oras;
 	string strada;
 	int capacitateTotala;
-	int nrMaximLocuri;
 	string denumireLocatie;
 public:
 	Locatie();
-	Locatie(string, string,int, int, string);
+	Locatie(string, string, int, string);
 	Locatie(const Locatie&);
     string getOras() const;
 	string getStrada() const;
 	int getCapacitateTotala() const;
-	//int getNrMaximLocuri() const;
+	int*** gettipNrRanduriNrLocuri() const;
 	string getDenumireLocatie() const;
 	void setOras(string);
 	void setStrada(string);
-	//void setNrMaximLocuri(int);
 	void setDenumireLocatie(string);
 	//void setCapacitateTotala(int);
 	//float rataOcupareLocatie();
@@ -30,5 +28,6 @@ public:
 	//Locatie& operator+=(int);
 	bool operator<(Locatie& l);
 	friend class Eveniment;
+	friend class Locuri;
 };
 

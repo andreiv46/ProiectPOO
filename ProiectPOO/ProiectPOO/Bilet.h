@@ -16,5 +16,6 @@ public:
 	Bilet& operator=(const Bilet&);
 	~Bilet();
 	friend ostream& operator<<(ostream&, const Bilet&);
+	friend class Locuri;
 };
 
