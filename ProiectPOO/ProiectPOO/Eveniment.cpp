@@ -5,30 +5,25 @@ Eveniment::Eveniment() {
 	this->data = "Necunoscuta";
 	this->oraIncepere = "Necunoscuta";
 	this->durata = "Necunoscuta";
-	this->nrLocuri = 0;
-	this->locatie = new Locatie();
 }
 Eveniment::Eveniment(string data):Eveniment() {
 	this->data = data;
-	locatie = new Locatie();
 }
-Eveniment::Eveniment(char* denumireEveniment, string data, string oraIncepere, string durata, int nrLocuri, Locatie locatie) {
+Eveniment::Eveniment(const char* denumireEveniment, string data, string oraIncepere, string durata, const Locatie& locatie) {
 	this->denumireEveniment = new char[strlen(denumireEveniment) + 1];
 	strcpy_s(this->denumireEveniment, strlen(denumireEveniment) + 1, denumireEveniment);
 	this->data = data;
 	this->oraIncepere = oraIncepere;
 	this->durata = durata;
-	this->nrLocuri = nrLocuri;
-	this->locatie = new Locatie(locatie);
+	this->locatie = locatie;
 }
 Eveniment::Eveniment(const Eveniment& e) {
 	this->denumireEveniment = new char[strlen(e.denumireEveniment) + 1];
 	strcpy_s(this->denumireEveniment, strlen(e.denumireEveniment) + 1, e.denumireEveniment);
 	this->data = e.data;
-	this->nrLocuri = e.nrLocuri;
 	this->oraIncepere = e.oraIncepere;
 	this->durata = "Necunoscuta";
-	this->locatie = new Locatie(*e.locatie);
+	this->locatie = e.locatie;
 }
 char* Eveniment::getDenumireEveniment() const {
 	char* copie = new char[strlen(this->denumireEveniment) + 1];
@@ -60,13 +55,6 @@ string Eveniment::getOraIncepere() const {
 //	if (oraIncepere >= 0 && oraIncepere <= 24)
 //		this->oraIncepere = oraIncepere;
 //}
-int Eveniment::getNrLocuri() const {
-	return this->nrLocuri;
-}
-void Eveniment::setNrLocuri(int nrLocuri) {
-	if (nrLocuri >= 0 && nrLocuri <= locatie->getCapacitateTotala())
-		this->nrLocuri = nrLocuri;
-}
 Eveniment& Eveniment::operator=(const Eveniment& e) {
 	if (this != &e) {
 		if (this->denumireEveniment != NULL)
@@ -75,11 +63,8 @@ Eveniment& Eveniment::operator=(const Eveniment& e) {
 		strcpy_s(this->denumireEveniment, strlen(e.denumireEveniment) + 1, e.denumireEveniment);
 		this->data = e.data;
 		this->oraIncepere = e.oraIncepere;
-		this->nrLocuri = e.nrLocuri;
 		this->durata = e.durata;
-		if (this->locatie != NULL)
-			delete this->locatie;
-		this->locatie = new Locatie(*e.locatie);
+		this->locatie = e.locatie;
 	}
 	return *this;
 }
@@ -87,10 +72,6 @@ Eveniment::~Eveniment() {
 	if (this->denumireEveniment != nullptr) {
 		delete[] this->denumireEveniment;
 		this->denumireEveniment = nullptr;
-	}
-	if (this->locatie != nullptr) {
-		delete this->locatie;
-		this->locatie = nullptr;
 	}
 }
 string Eveniment::getDurata() const {
@@ -100,24 +81,11 @@ string Eveniment::getDurata() const {
 //	if (durata >= 0 && durata <= 1440)
 //		this->durata = durata;
 //}
-Locatie* Eveniment::getLocatie() const {
-	if (this->locatie != nullptr) {
-		Locatie* copie = new Locatie(*this->locatie);
-		return copie;
-	}
-	else
-		return nullptr;
+Locatie Eveniment::getLocatie() const {
+	return this->locatie;
 }
-void Eveniment::setLocatie(Locatie* locatie) {
-	if (locatie != nullptr) {
-		if (this->locatie != nullptr)
-			delete this->locatie;
-		this->locatie = new Locatie(*locatie);
-	}
-	else {
-		delete this->locatie;
-		this->locatie = nullptr;
-	}
+void Eveniment::setLocatie(const Locatie& locatie) {
+	this->locatie = locatie;
 }
 void Eveniment::afisareOraSfarsit() const {
 	int oraIncepere = stoi(this->oraIncepere.substr(0, 2));
@@ -155,13 +123,13 @@ ostream& operator<<(ostream& out, const Eveniment& e) {
 	out << "Data: " << e.data << endl;
 	out << "Ora incepere: " << e.oraIncepere << endl;
 	out << "Durata: " << e.durata << endl;
-	out << "Numar locuri: " << e.nrLocuri << endl;
-	out << endl;
-	out << *e.locatie;
+	cout << endl;
+	out << "Locatie" << endl;
+	out << e.locatie;
 	return out;
 }
 istream& operator>>(istream& in, Eveniment& e) {
-	in >> *e.locatie;
+	in >> e.locatie;
 	cout << "Introduceti numele evenimentului: "; 
 	ws(in);
 	string denEvent;
@@ -207,14 +175,6 @@ istream& operator>>(istream& in, Eveniment& e) {
 			copieOra = to_string(ora.tm_hour) + ":" + to_string(ora.tm_min);
 		e.durata = copieOra;
 	}
-	cout << "Introduceti numarul de locuri: ";
-	in >> e.nrLocuri;
-	while (in.fail() || e.nrLocuri <= 0 || e.nrLocuri > e.locatie->getCapacitateTotala()) {
-		in.clear();
-		in.ignore(256, '\n');
-		cout << "Numar invalid, introduceti din nou: ";
-		in >> e.nrLocuri;
-	}
 	return in;
 }
 bool Eveniment::operator!=(const Eveniment& e) {
@@ -222,6 +182,41 @@ bool Eveniment::operator!=(const Eveniment& e) {
 }
 bool Eveniment::operator!() {
 	return this->data == "Necunoscuta";
+}
+float Eveniment::getPreturiEveniment(int index) {
+	if (index > 0 && index <= this->locatie.getNrZone())
+		return this->locatie.zone[index - 1].getPretBilet();
+	else
+		return -1;
+}
+void Eveniment::afisareZone() {
+	for (int i = 0; i < locatie.nrZone; i++) {
+		cout << locatie.zone[i];
+	}
+}
+void Eveniment::rezervareLoc(int index, int rand, int loc) {
+	this->locatie.zone[index - 1].rezervaLocuri(rand, loc);
+}
+int Eveniment::getNrZone() const {
+	return this->locatie.nrZone;
+}
+void Eveniment::afisareZona(int index) const{
+	cout << this->locatie.zone[index - 1];
+}
+int Eveniment::getNrRanduri(int index) const {
+	return this->locatie.zone[index - 1].getNrRanduri();
+}
+int Eveniment::getNrLocuri(int index) const {
+	return this->locatie.zone[index - 1].getNrLocuri();
+}
+bool Eveniment::checkLocLiber(int index, int rand, int loc) const {
+	return this->locatie.zone[index - 1].checkLocLiber(rand, loc);
+}
+string Eveniment::getNumeZona(int index) const {
+	return this->locatie.zone[index - 1].getNumeZona();
+}
+float Eveniment::getPretBilet(int index) const {
+	return this->locatie.zone[index - 1].getPretBilet();
 }
 
 

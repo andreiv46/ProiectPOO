@@ -30,19 +30,22 @@ Locuri& Locuri::operator=(const Locuri& l)
 {
 	if (this != &l)
 	{
-		this->nrRanduri = l.nrRanduri;
-		this->nrLocuri = l.nrLocuri;
 		if (this->locuri != nullptr){
 			for (int i = 0; i < this->nrRanduri; i++)
 				delete[] this->locuri[i];
 			delete[] this->locuri;
 		}
-		this->locuri = new bool* [l.nrRanduri];
-		for (int i = 0; i < l.nrRanduri; i++){
-			this->locuri[i] = new bool[l.nrLocuri];
-			for (int j = 0; j < l.nrLocuri; j++)
-				this->locuri[i][j] = l.locuri[i][j];
+		this->nrRanduri = l.nrRanduri;
+		this->nrLocuri = l.nrLocuri;
+		if (this->nrRanduri > 0 && this->nrLocuri > 0) {
+			this->locuri = new bool* [l.nrRanduri];
+			for (int i = 0; i < l.nrRanduri; i++) {
+				this->locuri[i] = new bool[l.nrLocuri];
+				for (int j = 0; j < l.nrLocuri; j++)
+					this->locuri[i][j] = l.locuri[i][j];
+			}
 		}
+		else this->locuri = nullptr;
 	}
 	return *this;
 }
@@ -165,7 +168,7 @@ ostream& operator<<(ostream& out, const Locuri& l)
 	out << "Numar locuri: " << l.nrLocuri << endl;
 	out << "Locurile disponibile: " << endl;
 	out << "0-disponibil" << endl;
-	out << "1-ocupat";
+	out << "1-ocupat" << endl;
 	for (int i = 0; i < l.nrRanduri; i++) {
 		out << "Randul " << i + 1 << ": ";
 		for (int j = 0; j < l.nrLocuri; j++)
@@ -231,3 +234,11 @@ int Locuri::numarLocuriDisponibile() const{
 bool Locuri::checkLocuriDisponibile() const {
 	return this->numarLocuriDisponibile() > 0;
 }
+void Locuri::ocupaLoc(int rand, int loc) {
+	this->locuri[rand - 1][loc - 1] = true;
+}
+bool Locuri::checkLocLiber(int rand, int loc) const{
+	if (this->locuri[rand - 1][loc - 1] == false)
+		return true;
+}
+

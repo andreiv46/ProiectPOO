@@ -23,6 +23,8 @@ public:
 	int numarLocuriTotal() const;
 	int numarLocuriDisponibile() const;
 	bool checkLocuriDisponibile() const;
+	bool checkLocLiber(int, int) const;
+	void ocupaLoc(int, int);
 	friend ostream& operator<<(ostream&, const Locuri&);
 	friend istream& operator>>(istream&, Locuri&);
 	bool operator>(const Locuri&);
@@ -30,5 +32,6 @@ public:
 	friend class Bilet;
 	friend class Eveniment;
 	friend class Locatie;
+	friend class Zona;
 };
 

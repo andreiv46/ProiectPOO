@@ -10,14 +10,12 @@ private:
 	string data;
 	string oraIncepere;
 	string durata;
-	int nrLocuri;
-	float* preturi;
-	Locatie* locatie = nullptr;
+	Locatie locatie;
 public:
 	Eveniment();
 	Eveniment(string);
 	Eveniment(const Eveniment&);
-	Eveniment(char*, string, string, string, int, Locatie);
+	Eveniment(const char*, string, string, string, const Locatie&);
 	char* getDenumireEveniment() const;
 	void setDenumireEveniment(const char*);
 	string getData() const;
@@ -26,20 +24,29 @@ public:
 	//void setOraIncepere(int);
 	string getDurata() const;
 	//void setDurata(int);
-	int getNrLocuri() const;
-	void setNrLocuri(int);
-	Locatie* getLocatie() const;
-	void setLocatie(Locatie*);
+	void setLocatie(const Locatie&);
+	int getNrZone() const;
+	void afisareZona(int) const;
+	int getNrRanduri(int) const;
+	int getNrLocuri(int) const;
+	float getPretBilet(int) const;
+	Locatie getLocatie() const;
 	~Eveniment();
 	Eveniment& operator=(const Eveniment&);
 	friend ostream& operator<<(ostream&, const Eveniment&);
 	friend istream& operator>>(istream&, Eveniment&);
 	void afisareOraSfarsit() const;
+	float getPreturiEveniment(int);
+	void afisareZone();
+	void rezervareLoc(int, int, int);
+	bool checkLocLiber(int, int, int) const;
+	string getNumeZona(int) const;
 	//void scadereNrLocuri(int);
 	bool operator!=(const Eveniment&);
 	bool operator!();
 	friend class Locatie;
 	friend class Locuri;
+	friend class Bilet;
 };
 
 
