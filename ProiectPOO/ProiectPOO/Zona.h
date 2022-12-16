@@ -28,6 +28,8 @@ public:
 	Zona& operator=(const Zona&);
 	friend ostream& operator<<(ostream&, const Zona&);
 	friend istream& operator>>(istream&, Zona&);
+	Zona& operator--();
+	operator int();
 	friend class Locuri;
 	int numarLocuriZona();
 	Zona& operator++();

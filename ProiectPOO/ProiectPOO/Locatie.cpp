@@ -248,6 +248,9 @@ int Locatie::getNrLocuri(int index) const {
 int Locatie::getNrRanduri(int index) const {
 	return this->zone[index - 1].getNrRanduri();
 }
+float operator/(int i, Locatie& l) {
+	return (float)i / l.NumardeLocuriLocatie();
+}
 
 
 

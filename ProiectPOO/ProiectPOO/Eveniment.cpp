@@ -1,21 +1,24 @@
 #include "Eveniment.h"
+int Eveniment::nrEvenimente = 0;
 Eveniment::Eveniment() {
 	this->denumireEveniment = new char[strlen("Necunoscut") + 1];
 	strcpy_s(denumireEveniment, strlen("Necunoscut") + 1, "Necunoscut");
 	this->data = "Necunoscuta";
 	this->oraIncepere = "Necunoscuta";
 	this->durata = "Necunoscuta";
+	this->idEveniment = ++nrEvenimente;
 }
 Eveniment::Eveniment(string data):Eveniment() {
 	this->data = data;
 }
-Eveniment::Eveniment(const char* denumireEveniment, string data, string oraIncepere, string durata, const Locatie& locatie) {
+Eveniment::Eveniment(const char* denumireEveniment, string data, string oraIncepere, string durata, const Locatie& locatie, int idEveniment) {
 	this->denumireEveniment = new char[strlen(denumireEveniment) + 1];
 	strcpy_s(this->denumireEveniment, strlen(denumireEveniment) + 1, denumireEveniment);
 	this->data = data;
 	this->oraIncepere = oraIncepere;
 	this->durata = durata;
 	this->locatie = locatie;
+	this->idEveniment = ++nrEvenimente;
 }
 Eveniment::Eveniment(const Eveniment& e) {
 	this->denumireEveniment = new char[strlen(e.denumireEveniment) + 1];
@@ -24,6 +27,7 @@ Eveniment::Eveniment(const Eveniment& e) {
 	this->oraIncepere = e.oraIncepere;
 	this->durata = "Necunoscuta";
 	this->locatie = e.locatie;
+	this->idEveniment = e.idEveniment;
 }
 char* Eveniment::getDenumireEveniment() const {
 	char* copie = new char[strlen(this->denumireEveniment) + 1];
@@ -45,16 +49,13 @@ void Eveniment::setDenumireEveniment(const char* denumireEveniment) {
 string Eveniment::getData() const{
 	return this->data;
 }
-//void Eveniment::setData(string data) {
-//	if(data.length() > 0)
-//}
+void Eveniment::setData(string data) {
+	if(data.length() > 0)
+		this->data = data;
+}
 string Eveniment::getOraIncepere() const {
 	return this->oraIncepere;
 }
-//void Eveniment::setOraIncepere(int oraIncepere) {
-//	if (oraIncepere >= 0 && oraIncepere <= 24)
-//		this->oraIncepere = oraIncepere;
-//}
 Eveniment& Eveniment::operator=(const Eveniment& e) {
 	if (this != &e) {
 		if (this->denumireEveniment != NULL)
@@ -65,6 +66,7 @@ Eveniment& Eveniment::operator=(const Eveniment& e) {
 		this->oraIncepere = e.oraIncepere;
 		this->durata = e.durata;
 		this->locatie = e.locatie;
+		this->idEveniment = e.idEveniment;
 	}
 	return *this;
 }
@@ -77,10 +79,9 @@ Eveniment::~Eveniment() {
 string Eveniment::getDurata() const {
 	return this->durata;
 }
-//void Eveniment::setDurata(int durata) {
-//	if (durata >= 0 && durata <= 1440)
-//		this->durata = durata;
-//}
+void Eveniment::setDurata(string durata) {
+	this->durata = durata;
+}
 Locatie Eveniment::getLocatie() const {
 	return this->locatie;
 }
@@ -130,6 +131,31 @@ ostream& operator<<(ostream& out, const Eveniment& e) {
 }
 istream& operator>>(istream& in, Eveniment& e) {
 	in >> e.locatie;
+	time_t now = time(0);
+	tm* ltm = localtime(&now);
+	int year = 1900 + ltm->tm_year;
+	int month = 1 + ltm->tm_mon;
+	int day = ltm->tm_mday;
+	struct tm data;
+	cout << "Introduceti data evenimentului (dd/mm/yyyy): ";
+	in >> get_time(&data, "%d/%m/%Y");
+	while (in.fail() || data.tm_year + 1900 < year || data.tm_year + 1900 == year && data.tm_mon + 1 < month || data.tm_year + 1900 == year && data.tm_mon + 1 == month && data.tm_mday < day)
+	{
+		in.clear();
+		in.ignore(256, '\n');
+		cout << "Data este invalida, incercati din nou (dd/mm/yyyy): ";
+		in >> get_time(&data, "%d/%m/%Y");
+	}
+	string dataEveniment;
+	if (data.tm_mday < 10 && data.tm_mon + 1 < 10)
+		dataEveniment = "0" + to_string(data.tm_mday) + "/0" + to_string(data.tm_mon + 1) + "/" + to_string(data.tm_year + 1900);
+	else if (data.tm_mday < 10 && data.tm_mon + 1 >= 10)
+		dataEveniment = "0" + to_string(data.tm_mday) + "/" + to_string(data.tm_mon + 1) + "/" + to_string(data.tm_year + 1900);
+	else if (data.tm_mday >= 10 && data.tm_mon + 1 < 10)
+		dataEveniment = to_string(data.tm_mday) + "/0" + to_string(data.tm_mon + 1) + "/" + to_string(data.tm_year + 1900);
+	else
+		dataEveniment = to_string(data.tm_mday) + "/" + to_string(data.tm_mon + 1) + "/" + to_string(data.tm_year + 1900);
+	e.data = dataEveniment;
 	cout << "Introduceti numele evenimentului: "; 
 	ws(in);
 	string denEvent;
@@ -217,6 +243,12 @@ string Eveniment::getNumeZona(int index) const {
 }
 float Eveniment::getPretBilet(int index) const {
 	return this->locatie.zone[index - 1].getPretBilet();
+}
+int Eveniment::getIdEveniment() const {
+	return this->idEveniment;
+}
+int Eveniment::getNrEvenimente() const{
+	return nrEvenimente;
 }
 
 

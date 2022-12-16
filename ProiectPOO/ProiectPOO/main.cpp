@@ -8,6 +8,10 @@
 #include "Locuri.h"
 #include "Zona.h"
 #include "functiimain.h"
+
+//clasa meniu cu vector stl
+//overload pe of/ifstream 
+
 //------------------------------------------------TESTING------------------------------------------------
 //int main() {
 //	Locatie* locatie = new Locatie[2];
@@ -38,7 +42,7 @@
 //			tm* ltm = localtime(&now);
 //			int year = 1900 + ltm->tm_year;
 //			int month = 1 + ltm->tm_mon;
-//			int day = ltm->tm_mday;
+//			int day = ltm->tm_mday;	
 //			struct tm data;
 //			cout << "Introduceti data evenimentului (dd/mm/yyyy): ";
 //			cin >> get_time(&data, "%d/%m/%Y");
@@ -84,11 +88,11 @@
 //				cin >> nrEveniment;
 //			}
 //			if (nrEveniment == 1) {
-//				Bilet b(evenimente0, 69);
+//				Bilet b(evenimente0);
 //				cout << b;
 //			}
 //			else {
-//				Bilet b(evenimente1, 23);
+//				Bilet b(evenimente1);
 //				cout << b;
 //			}
 //			
@@ -195,11 +199,15 @@ int main() {
 	//	cout << b;
 	//}
 	//return 0;
-	Eveniment* evenimente0 = new Eveniment("01/01/2024");
+	
+
+	Eveniment* evenimente0 = new Eveniment();
 	cin >> *evenimente0;
 	Bilet b(*evenimente0);
 	cin >> b;
+	evenimente0->rezervareLoc(b.getNrZona(), b.getRand(), b.getLoc());
 	cout << b;
 	cout << *evenimente0;
+	cout << endl << evenimente0->getIdEveniment();
 	return 0;
 }

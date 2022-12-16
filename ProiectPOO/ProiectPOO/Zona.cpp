@@ -89,5 +89,14 @@ int Zona::getNrRanduri() const{
 bool Zona::checkLocLiber(int rand, int loc) const {
 	return this->locuri.checkLocLiber(rand, loc);
 }
+Zona& Zona::operator--() {
+	float copie = this->pretBilet;
+	copie -= 0.1 * copie;
+	this->pretBilet = round(copie * 100) / 100;
+	return *this;
+}
+Zona::operator int() {
+	return this->pretBilet;
+}
 
 

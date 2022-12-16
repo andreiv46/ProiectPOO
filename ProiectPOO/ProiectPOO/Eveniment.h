@@ -1,4 +1,5 @@
 #pragma once
+#pragma warning(disable:4996)
 #include "Locatie.h"
 #include <iostream>
 #include <iomanip>
@@ -11,19 +12,20 @@ private:
 	string oraIncepere;
 	string durata;
 	Locatie locatie;
+	static int nrEvenimente;
+	int idEveniment;
 public:
 	Eveniment();
 	Eveniment(string);
 	Eveniment(const Eveniment&);
-	Eveniment(const char*, string, string, string, const Locatie&);
+	Eveniment(const char*, string, string, string, const Locatie&, int);
 	char* getDenumireEveniment() const;
 	void setDenumireEveniment(const char*);
 	string getData() const;
-	//void setData(string);
+	void setData(string);
 	string getOraIncepere() const;
-	//void setOraIncepere(int);
 	string getDurata() const;
-	//void setDurata(int);
+	void setDurata(string);
 	void setLocatie(const Locatie&);
 	int getNrZone() const;
 	void afisareZona(int) const;
@@ -41,6 +43,8 @@ public:
 	void rezervareLoc(int, int, int);
 	bool checkLocLiber(int, int, int) const;
 	string getNumeZona(int) const;
+	int getIdEveniment() const;
+	int getNrEvenimente() const;
 	//void scadereNrLocuri(int);
 	bool operator!=(const Eveniment&);
 	bool operator!();

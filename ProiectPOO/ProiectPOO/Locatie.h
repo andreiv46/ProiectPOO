@@ -34,11 +34,11 @@ public:
 	int getNrLocuri(int) const;
 	//void setCapacitateTotala(int);
 	//float rataOcupareLocatie();
+	friend float operator/(int, Locatie&);
 	friend ostream& operator<<(ostream& out,const Locatie &l);
 	friend istream& operator>>(istream& in, Locatie& l);
 	Locatie& operator=(const Locatie&);
 	int NumardeLocuriLocatie();
-	//Locatie& operator+=(int);
 	bool operator<(Locatie& l);
 	friend class Eveniment;
 	friend class Locuri;
