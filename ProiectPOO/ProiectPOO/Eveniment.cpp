@@ -247,8 +247,25 @@ float Eveniment::getPretBilet(int index) const {
 int Eveniment::getIdEveniment() const {
 	return this->idEveniment;
 }
-int Eveniment::getNrEvenimente() const{
+int Eveniment::getNrEvenimente(){
 	return nrEvenimente;
 }
+//string Eveniment::getCelMaiMicPret(const Eveniment* evenimente, int nrEvenimente) {
+//	if (evenimente != nullptr || nrEvenimente > 0) {
+//		float celMaiMicPret = evenimente[0].locatie.zone[0].getPretBilet();
+//		string denumireEveniment = evenimente[0].getDenumireEveniment();
+//		for (int i = 0; i < nrEvenimente; i++) {
+//			for (int j = 0; j < evenimente[i].locatie.getNrZone(); j++) {
+//				if (evenimente[i].locatie.zone[j].getPretBilet() < celMaiMicPret) {
+//					celMaiMicPret = evenimente[i].locatie.zone[j].getPretBilet();
+//					denumireEveniment = evenimente[i].getDenumireEveniment();
+//				}
+//			}
+//		}
+//		return denumireEveniment;
+//	}
+//	else
+//		return "Nu exista evenimente";
+//}
 
 

@@ -17,7 +17,7 @@ private:
 	Eveniment eveniment;
 public:
 	Bilet();
-	Bilet(string numeClient, string prenumeClient, const Eveniment&, int, int, int, int);
+	Bilet(string numeClient, string prenumeClient, const Eveniment& eveniment, int rand, int loc, int nrZona, int idBilet);
 	Bilet(const Eveniment& eveniment);
 	Bilet(const Bilet&);
 	~Bilet();
@@ -35,6 +35,6 @@ public:
 	string getPrenumeClient() const;
 	float operator+(const Bilet&);
 	friend float operator*(int, const Bilet&);
-	float getPretBilet() const;
+	//float getPretBilet() const;
 };
 

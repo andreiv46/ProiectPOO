@@ -8,13 +8,9 @@ Locatie::Locatie() {
 	this->zone = nullptr;
 }
 Locatie::Locatie(string oras, string strada, int capacitateTotala, string denumireLocatie, const Zona* zone, int nrZone):Locatie() {
-	if (oras.length() > 0)
 		this->oras = oras;
-	if (strada.length() > 0)
 		this->strada = strada;
-	if (capacitateTotala > 0)
 		this->capacitateTotala = capacitateTotala;
-	if (denumireLocatie.length() > 0)
 		this->denumireLocatie = denumireLocatie;
 	if (nrZone > 0) {
 		this->nrZone = nrZone;
@@ -81,16 +77,6 @@ void Locatie::setZone(const Zona* zone, int nrZone) {
 	}
 	else cout << "Nu se poate seta zona";
 }
-//void Locatie::setCapacitateTotala(int capacitateaTotala) {
-//	if (capacitateaTotala > 0) {
-//		if (capacitateaTotala < this->nrMaximLocuri) {
-//			cout << "Capacitatea este mai mica decat numarul de locuri disponibile" << endl;
-//		}
-//		else {
-//			this->capacitateTotala = capacitateaTotala;
-//		}
-//	}
-//}
 void Locatie::setOras(string oras) {
 	if (oras.length() > 0)
 		this->oras = oras;
@@ -99,18 +85,10 @@ void Locatie::setStrada(string strada) {
 	if (strada.length() > 0)
 		this->strada = strada;
 }
-//void Locatie::setNrMaximLocuri(int nrMaximLocuri) {
-//	if (nrMaximLocuri > 0)
-//		this->nrMaximLocuri = nrMaximLocuri;
-//}
 void Locatie::setDenumireLocatie(string denumireLocatie) {
 	if (denumireLocatie.length() > 0)
 		this->denumireLocatie = denumireLocatie;
 }
-//float Locatie::rataOcupareLocatie() {
-//	if (capacitateTotala > 0)
-//		return ((float)this->nrMaximLocuri / this->capacitateTotala) * 100;
-//}
 ostream& operator<<(ostream& out,const Locatie &l) {
 	out << "======================" << endl;
 	out << "Locatia evenimentului" << endl;
@@ -186,12 +164,6 @@ istream& operator>>(istream& in, Locatie& l)
 	}
 	return in;
 }
-//Locatie& Locatie::operator+=(int nrLocuri) {
-//	if (this->nrMaximLocuri + nrLocuri > this->capacitateTotala)
-//		cout << "Depaseste capacitatea locatiei!";
-//	else nrMaximLocuri += nrLocuri;
-//	return *this;
-//}
 bool Locatie::operator<(Locatie& l)
 {
 	return this->capacitateTotala-l.getCapacitateTotala();
@@ -236,7 +208,7 @@ bool Locatie::checkCapacitate() {
 		return false;
 	return true;
 }
-int Locatie::NumardeLocuriLocatie() {
+int Locatie::NumardeLocuriLocatie() const{
 	int suma = 0;
 	for (int i = 0; i < this->nrZone; i++)
 		suma += this->zone[i].numarLocuriZona();
@@ -250,6 +222,9 @@ int Locatie::getNrRanduri(int index) const {
 }
 float operator/(int i, Locatie& l) {
 	return (float)i / l.NumardeLocuriLocatie();
+}
+float Locatie::rataOcupareLocatie() const{
+	return (float)this->NumardeLocuriLocatie() / this->capacitateTotala;
 }
 
 

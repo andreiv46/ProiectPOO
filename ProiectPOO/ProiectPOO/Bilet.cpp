@@ -140,7 +140,7 @@ istream& operator>>(istream& in, Bilet& bilet) {
 	bilet.eveniment.rezervareLoc(bilet.nrZona, bilet.rand, bilet.loc);
 	bilet.dimensiuneUID = bilet.prenumeClient.length();
 	bilet.UID = new int[bilet.dimensiuneUID + 2];
-	if (bilet.prenumeClient.length() < 5) {
+	if (bilet.prenumeClient.length() < 5 && bilet.prenumeClient.length() > 0) {
 		bilet.dimensiuneUID = bilet.prenumeClient.length();
 		bilet.UID = new int[bilet.dimensiuneUID + 2];
 		bilet.UID[0] = bilet.idBilet;

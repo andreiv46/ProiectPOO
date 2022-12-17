@@ -1,10 +1,5 @@
-﻿  Bilet.cpp
-  Eveniment.cpp
-  Locatie.cpp
-  Zona.cpp
-D:\Github\ProiectPOO\ProiectPOO\ProiectPOO\Zona.cpp(73,15): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-D:\Github\ProiectPOO\ProiectPOO\ProiectPOO\Zona.cpp(94,15): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
-D:\Github\ProiectPOO\ProiectPOO\ProiectPOO\Zona.cpp(99,13): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-  main.cpp
-  Generating Code...
+﻿  main.cpp
+D:\Github\ProiectPOO\ProiectPOO\ProiectPOO\main.cpp(218,45): warning C4305: 'argument': truncation from 'double' to 'float'
+D:\Github\ProiectPOO\ProiectPOO\ProiectPOO\main.cpp(219,48): warning C4305: 'argument': truncation from 'double' to 'float'
+D:\Github\ProiectPOO\ProiectPOO\ProiectPOO\main.cpp(220,44): warning C4305: 'argument': truncation from 'double' to 'float'
   ProiectPOO.vcxproj -> D:\Github\ProiectPOO\ProiectPOO\Debug\ProiectPOO.exe

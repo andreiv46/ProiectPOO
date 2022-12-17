@@ -12,26 +12,26 @@ private:
 	Locuri locuri;
 public:
 	Zona();
-	Zona(string, float, const Locuri&);
+	Zona(string numeZona, float pretBilet, const Locuri& locuri);
 	Zona(const Locuri& locuri);
 	Zona(const Zona& z);
 	string getNumeZona() const;
 	float getPretBilet() const;
 	Locuri getLocuri() const;
-	void setNumeZona(string);
-	void setPretBilet(float);
+	void setNumeZona(string numeZona);
+	void setPretBilet(float pretBilet);
 	void setLocuri(const Locuri&);
-	void rezervaLocuri(int, int);
+	void rezervaLocuri(int rand, int loc);
 	int getNrLocuri() const;
 	int getNrRanduri() const;
-	bool checkLocLiber(int, int) const;
+	bool checkLocLiber(int rand, int loc) const;
 	Zona& operator=(const Zona&);
 	friend ostream& operator<<(ostream&, const Zona&);
 	friend istream& operator>>(istream&, Zona&);
 	Zona& operator--();
 	operator int();
 	friend class Locuri;
-	int numarLocuriZona();
+	int numarLocuriZona() const;
 	Zona& operator++();
 };
 

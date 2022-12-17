@@ -74,7 +74,7 @@ Zona& Zona::operator++() {
 	this->pretBilet = round(copie * 100) / 100;
 	return *this;
 }
-int Zona::numarLocuriZona() {
+int Zona::numarLocuriZona() const{
 	return this->locuri.numarLocuriTotal();
 }
 void Zona::rezervaLocuri(int rand, int loc) {
