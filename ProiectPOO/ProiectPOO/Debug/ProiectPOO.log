@@ -1,5 +1,2 @@
-﻿  main.cpp
-D:\Github\ProiectPOO\ProiectPOO\ProiectPOO\main.cpp(218,45): warning C4305: 'argument': truncation from 'double' to 'float'
-D:\Github\ProiectPOO\ProiectPOO\ProiectPOO\main.cpp(219,48): warning C4305: 'argument': truncation from 'double' to 'float'
-D:\Github\ProiectPOO\ProiectPOO\ProiectPOO\main.cpp(220,44): warning C4305: 'argument': truncation from 'double' to 'float'
+﻿  Eveniment.cpp
   ProiectPOO.vcxproj -> D:\Github\ProiectPOO\ProiectPOO\Debug\ProiectPOO.exe

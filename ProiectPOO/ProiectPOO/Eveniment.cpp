@@ -6,10 +6,11 @@ Eveniment::Eveniment() {
 	this->data = "Necunoscuta";
 	this->oraIncepere = "Necunoscuta";
 	this->durata = "Necunoscuta";
-	this->idEveniment = ++nrEvenimente;
+	this->idEveniment = 0;
 }
 Eveniment::Eveniment(string data):Eveniment() {
 	this->data = data;
+	this->idEveniment = ++nrEvenimente;
 }
 Eveniment::Eveniment(const char* denumireEveniment, string data, string oraIncepere, string durata, const Locatie& locatie, int idEveniment) {
 	this->denumireEveniment = new char[strlen(denumireEveniment) + 1];
@@ -75,6 +76,7 @@ Eveniment::~Eveniment() {
 		delete[] this->denumireEveniment;
 		this->denumireEveniment = nullptr;
 	}
+	this->nrEvenimente--;
 }
 string Eveniment::getDurata() const {
 	return this->durata;
@@ -201,6 +203,7 @@ istream& operator>>(istream& in, Eveniment& e) {
 			copieOra = to_string(ora.tm_hour) + ":" + to_string(ora.tm_min);
 		e.durata = copieOra;
 	}
+	e.idEveniment = ++e.nrEvenimente;
 	return in;
 }
 bool Eveniment::operator!=(const Eveniment& e) {
@@ -250,22 +253,22 @@ int Eveniment::getIdEveniment() const {
 int Eveniment::getNrEvenimente(){
 	return nrEvenimente;
 }
-//string Eveniment::getCelMaiMicPret(const Eveniment* evenimente, int nrEvenimente) {
-//	if (evenimente != nullptr || nrEvenimente > 0) {
-//		float celMaiMicPret = evenimente[0].locatie.zone[0].getPretBilet();
-//		string denumireEveniment = evenimente[0].getDenumireEveniment();
-//		for (int i = 0; i < nrEvenimente; i++) {
-//			for (int j = 0; j < evenimente[i].locatie.getNrZone(); j++) {
-//				if (evenimente[i].locatie.zone[j].getPretBilet() < celMaiMicPret) {
-//					celMaiMicPret = evenimente[i].locatie.zone[j].getPretBilet();
-//					denumireEveniment = evenimente[i].getDenumireEveniment();
-//				}
-//			}
-//		}
-//		return denumireEveniment;
-//	}
-//	else
-//		return "Nu exista evenimente";
-//}
+string Eveniment::getCelMaiMicPret(const Eveniment* evenimente, int nrEvenimente) {
+	if (evenimente != nullptr && nrEvenimente > 0 && evenimente->locatie.getNrZone() > 0) {
+		float celMaiMicPret = evenimente[0].locatie.zone[0].getPretBilet();
+		string denumireEveniment = evenimente[0].getDenumireEveniment();
+		for (int i = 0; i < nrEvenimente; i++) {
+			for (int j = 0; j < evenimente[i].locatie.getNrZone(); j++) {
+				if (evenimente[i].locatie.zone[j].getPretBilet() < celMaiMicPret) {
+					celMaiMicPret = evenimente[i].locatie.zone[j].getPretBilet();
+					denumireEveniment = evenimente[i].getDenumireEveniment();
+				}
+			}
+		}
+		return denumireEveniment;
+	}
+	else
+		return "Nu exista evenimente";
+}
 
 

@@ -46,7 +46,6 @@ public:
 	int getIdEveniment() const;
 	static int getNrEvenimente();
 	static string getCelMaiMicPret(const Eveniment* evenimente, int nrEvenimente);
-	//void scadereNrLocuri(int);
 	bool operator!=(const Eveniment&);
 	bool operator!();
 	friend class Locatie;

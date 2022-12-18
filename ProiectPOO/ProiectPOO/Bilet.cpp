@@ -138,18 +138,16 @@ istream& operator>>(istream& in, Bilet& bilet) {
 		}
 	}
 	bilet.eveniment.rezervareLoc(bilet.nrZona, bilet.rand, bilet.loc);
-	bilet.dimensiuneUID = bilet.prenumeClient.length();
-	bilet.UID = new int[bilet.dimensiuneUID + 2];
 	if (bilet.prenumeClient.length() < 5 && bilet.prenumeClient.length() > 0) {
-		bilet.dimensiuneUID = bilet.prenumeClient.length();
-		bilet.UID = new int[bilet.dimensiuneUID + 2];
+		bilet.dimensiuneUID = bilet.prenumeClient.length() + 2;
+		bilet.UID = new int[bilet.dimensiuneUID];
 		bilet.UID[0] = bilet.idBilet;
-		for (int i = 0; i < bilet.dimensiuneUID; i++)
+		for (int i = 0; i < bilet.dimensiuneUID - 2; i++)
 			bilet.UID[i + 1] = (int)bilet.prenumeClient[i];
-		bilet.UID[bilet.dimensiuneUID + 1] = bilet.eveniment.getIdEveniment();
+		bilet.UID[bilet.dimensiuneUID - 1] = bilet.eveniment.getIdEveniment();
 	}
-	else {
-		bilet.dimensiuneUID = 4;
+	else if(bilet.prenumeClient.length() > 5 && bilet.prenumeClient.length() > 0) {
+		bilet.dimensiuneUID = 6;
 		bilet.UID = new int[6];
 		bilet.UID[0] = bilet.idBilet;
 		for (int i = 0; i < 4; i++)
@@ -192,5 +190,6 @@ int* Bilet::getUID() const {
 		copie[i] = this->UID[i];
 	return copie;
 }
+
 
 
