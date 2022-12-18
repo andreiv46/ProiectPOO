@@ -178,8 +178,10 @@ float operator*(int i, const Bilet& bilet) {
 	return i * bilet.eveniment.getPretBilet(bilet.nrZona);
 }
 Bilet::~Bilet() {
-	if (this->UID != nullptr)
+	if (this->UID != nullptr) {
 		delete[] this->UID;
+		this->UID = nullptr;
+	}
 }
 int Bilet::getdimensiuneUID() const {
 	return this->dimensiuneUID;
@@ -190,6 +192,31 @@ int* Bilet::getUID() const {
 		copie[i] = this->UID[i];
 	return copie;
 }
+Eveniment Bilet::getEveniment() const {
+	return this->eveniment;
+}
+bool Bilet::verificaUID(string UID) const{
+	if (UID.length() > 0) {
+		string copieUID;
+		for (int i = 0; i < this->dimensiuneUID; i++)
+			copieUID += to_string(this->UID[i]);
+		if (copieUID == UID)
+			return true;
+		return false;
+	}
+	return false;
+}
+void Bilet::setNumeClient(string numeClient) {
+	this->numeClient = numeClient;
+}
+void Bilet::setPrenumeClient(string prenumeClient) {
+	this->prenumeClient = prenumeClient;
+}
+
+
+
+
+
 
 
 

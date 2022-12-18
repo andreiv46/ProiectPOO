@@ -33,8 +33,13 @@ public:
 	int* getUID() const;
 	string getNumeClient() const;
 	string getPrenumeClient() const;
+	Eveniment getEveniment() const;
 	float operator+(const Bilet&);
 	friend float operator*(int, const Bilet&);
+	bool verificaUID(string UID) const;
+	void setNumeClient(string numeClient);
+	void setPrenumeClient(string prenumeClient);
+	bool checkData();
 	//float getPretBilet() const;
 };
 
