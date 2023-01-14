@@ -110,4 +110,7 @@ Zona::~Zona() {
 	this->pretBilet = 0;
 	this->locuri.~Locuri();
 }
+bool Zona::checkLocuriLibereZona() const {
+	return this->locuri.checkLocuriDisponibile();
+}
 

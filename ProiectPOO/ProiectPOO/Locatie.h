@@ -30,6 +30,7 @@ public:
 	void setZone(const Zona*, int);
 	void setNrZone(int nrZone);
 	bool checkCapacitate();
+	bool checkLocuriLibereZona(int index);
 	int getNrRanduri(int index) const;
 	int getNrLocuri(int index) const;
 	float rataOcupareLocatie() const;

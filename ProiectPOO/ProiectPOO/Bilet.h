@@ -2,6 +2,7 @@
 #include <iostream>
 #include "Locatie.h"
 #include "Eveniment.h"
+#include "DateAdmin.h"
 class Bilet
 {
 private:
@@ -14,12 +15,10 @@ private:
 	int* UID;
 	int dimensiuneUID;  
 	static int nrBilete;
-	Eveniment eveniment;
 public:
 	Bilet();
-	Bilet(string numeClient, string prenumeClient, const Eveniment& eveniment, int rand, int loc, int nrZona, int idBilet);
+	Bilet(string numeClient, string prenumeClient, int rand, int loc, int nrZona, int idEveniment);
 	Bilet(string numeClient, string prenumeClient, int rand, int loc, int nrZona, int dimensiuneUID, int* UID, int idBilet);
-	Bilet(const Eveniment& eveniment);
 	Bilet(const Bilet&);
 	~Bilet();
 	Bilet& operator=(const Bilet&);
@@ -40,8 +39,9 @@ public:
 	bool verificaUID(string UID) const;
 	void setNumeClient(string numeClient);
 	void setPrenumeClient(string prenumeClient);
+	int getEvenimentID() const;
 	//bool checkData();
-	friend class Meniu;
+	friend class DateAdmin;
 	//float getPretBilet() const;
 };
 

@@ -12,24 +12,25 @@ Eveniment::Eveniment(string data):Eveniment() {
 	this->data = data;
 	this->idEveniment = ++nrEvenimente;
 }
-Eveniment::Eveniment(const char* denumireEveniment, string data, string oraIncepere, string durata, const Locatie& locatie, int idEveniment) {
+Eveniment::Eveniment(const char* denumireEveniment, string data, string oraIncepere, string durataEveniment, const Locatie& locatie, int idEveniment) {
 	this->denumireEveniment = new char[strlen(denumireEveniment) + 1];
 	strcpy_s(this->denumireEveniment, strlen(denumireEveniment) + 1, denumireEveniment);
 	this->data = data;
 	this->oraIncepere = oraIncepere;
-	this->durata = durata;
+	this->durata = durataEveniment;
 	this->locatie = locatie;
 	this->idEveniment = idEveniment;
-	nrEvenimente++;
+	this->nrEvenimente++;
 }
 Eveniment::Eveniment(const Eveniment& e) {
 	this->denumireEveniment = new char[strlen(e.denumireEveniment) + 1];
 	strcpy_s(this->denumireEveniment, strlen(e.denumireEveniment) + 1, e.denumireEveniment);
 	this->data = e.data;
 	this->oraIncepere = e.oraIncepere;
-	this->durata = "Necunoscuta";
+	this->durata = e.durata;
 	this->locatie = e.locatie;
 	this->idEveniment = e.idEveniment;
+	this->nrEvenimente++;
 }
 char* Eveniment::getDenumireEveniment() const {
 	char* copie = new char[strlen(this->denumireEveniment) + 1];
@@ -122,11 +123,12 @@ void Eveniment::afisareOraSfarsit() const {
 ostream& operator<<(ostream& out, const Eveniment& e) {
 	out << endl;
 	out << "===================" << endl;
+	out << "ID-ul evenimentului: " << e.idEveniment << endl;
 	out << "Evenimentul" << endl;
 	out << "Denumire eveniment: " << e.denumireEveniment << endl;
 	out << "Data: " << e.data << endl;
 	out << "Ora incepere: " << e.oraIncepere << endl;
-	out << "Durata: " << e.durata << endl;
+	out << "Durata: " << e.getDurata() << endl; //??? de ce nu imi arata bine
 	cout << endl;
 	out << "Locatie" << endl;
 	out << e.locatie;

@@ -253,5 +253,6 @@ void Locuri::ocupaLoc(int rand, int loc) {
 bool Locuri::checkLocLiber(int rand, int loc) const{
 	if (this->locuri[rand - 1][loc - 1] == false)
 		return true;
+	return false;
 }
 

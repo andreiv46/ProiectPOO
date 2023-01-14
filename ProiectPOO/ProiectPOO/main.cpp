@@ -7,7 +7,10 @@
 #include "Bilet.h"
 #include "Locuri.h"
 #include "Zona.h"
-#include "Meniu.h"
+#include "DateAdmin.h"
+#include "DateUser.h"
+#include "MeniuAdmin.h"
+#include "MeniuClientStudent.h"
 
 //de facut 
 //clasa meniu cu vector stl
@@ -16,7 +19,7 @@
 
 //------------------------------------------------TESTING------------------------------------------------
 
-int main() {
+int main(int argc, char** argv) {
 	//locuri
 	Locuri locuri0(3, 4);
 	Locuri locuri1(2, 3);
@@ -31,14 +34,14 @@ int main() {
 	//eveniment
 	char* denumireEv0 = new char[strlen("Concert Eminem") + 1];
 	strcpy(denumireEv0, "Concert Eminem");
-	Eveniment ev0(denumireEv0, "24/12/2023", "20:00", "Necunoscuta", locatie0, 1);
+	//Eveniment ev0(denumireEv0, "24/12/2023", "20:00", "Necunoscuta", locatie0, 1);
 	char* denumireEv1 = new char[strlen("Concert Metallica") + 1];
 	strcpy(denumireEv1, "Concert Metallica");
-	Eveniment ev1(denumireEv1, "25/12/2023", "21:00", "04:25", locatie1, 2);
+	//Eveniment ev1(denumireEv1, "25/12/2023", "21:00", "04:25", locatie1, 2);
 	char* denumireEv2 = new char[strlen("Avatar 2") + 1];
 	strcpy(denumireEv2, "Avatar 2");
-	Eveniment ev2(denumireEv2, "26/12/2023", "22:00", "03:30", locatie2, 3);
-	ev2.rezervareLoc(1, 1, 1);
+	//Eveniment ev2(denumireEv2, "26/12/2023", "22:00", "03:30", locatie2, 3);
+	//ev2.rezervareLoc(1, 1, 1);
 	//cout << ev0 << ev1 << ev2;
 	//cout << endl << Eveniment::getNrEvenimente() << endl;
 	
@@ -75,25 +78,9 @@ int main() {
 	//cin >> ev;
 	//cout << Eveniment::getNrEvenimente() << endl;
 
-	//Locuri l1(12, 10);
-	//Locuri l2;
-	//l2 = l1;
-	//cout << l2;
-	Meniu m("evenimente.txt");
-	//Bilet b(ev0);
-	//cin >> b;
-	//m.adaugaBiletFisierBinar(b);
-	////cout << b;
-	//cout << endl;
-	//cout << "===========================================";
-	//cout << endl;
-	//m.citesteBileteleFisierBinar();
-	////m.afisareBilete();
-	//m.adaugaEvenimentFisierText(ev2);
-	//m.adaugaEvenimentFisierText(ev1);
-	//m.adaugaEvenimentFisierText(ev0);
-	cout << m.getNrEvenimente() << endl;
-	m.afisareEvenimente();
-	
+	MeniuClientStudent m("yes.txt");
+	m.optiune();
+	cout << endl << Eveniment::getNrEvenimente() << endl;
+	cout << endl << Bilet::getNrBilete() << endl;
 	return 0;
 }

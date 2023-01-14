@@ -33,10 +33,16 @@
     <ClCompile Include="Zona.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Meniu.cpp">
+    <ClCompile Include="DateAdmin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MeniuUser.cpp">
+    <ClCompile Include="DateUser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MeniuAdmin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MeniuClientStudent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -56,10 +62,19 @@
     <ClInclude Include="Zona.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Meniu.h">
+    <ClInclude Include="DateAdmin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MeniuUser.h">
+    <ClInclude Include="DateUser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IDiscount.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MeniuAdmin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MeniuClientStudent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

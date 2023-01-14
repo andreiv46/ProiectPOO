@@ -226,7 +226,9 @@ float operator/(int i, Locatie& l) {
 float Locatie::rataOcupareLocatie() const{
 	return (float)this->NumardeLocuriLocatie() / this->capacitateTotala;
 }
-
+bool Locatie::checkLocuriLibereZona(int index) {
+	return this->zone[index - 1].checkLocuriLibereZona();
+}
 
 
 
