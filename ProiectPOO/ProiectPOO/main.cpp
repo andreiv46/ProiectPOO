@@ -7,6 +7,7 @@
 #include "Bilet.h"
 #include "Locuri.h"
 #include "Zona.h"
+#include "Meniu.h"
 
 //de facut 
 //clasa meniu cu vector stl
@@ -38,40 +39,61 @@ int main() {
 	strcpy(denumireEv2, "Avatar 2");
 	Eveniment ev2(denumireEv2, "26/12/2023", "22:00", "03:30", locatie2, 3);
 	ev2.rezervareLoc(1, 1, 1);
-	cout << ev0 << ev1 << ev2;
-	cout << endl << Eveniment::getNrEvenimente() << endl;
+	//cout << ev0 << ev1 << ev2;
+	//cout << endl << Eveniment::getNrEvenimente() << endl;
 	
-	cout << "Alegeti evenimentul: ";
-	int optiune;
-	cin >> optiune;
-	if (optiune == 1) {
-		Bilet b(ev0);
-		cin >> b;
-		cout << b;
-		ev0.rezervareLoc(b.getNrZona(), b.getRand(), b.getLoc());
-		cout << ev0;
-	}
-	else if (optiune == 2) {
-		Bilet b(ev1);
-		cin >> b;
-		cout << b;
-		ev1.rezervareLoc(b.getNrZona(), b.getRand(), b.getLoc());
-		cout << ev1;
-	}
-	else if (optiune == 3) {
-		Bilet b(ev2);
-		cin >> b;
-		cout << b;
-		ev2.rezervareLoc(b.getNrZona(), b.getRand(), b.getLoc());
-		cout << ev2;
-	}
-	else {
-		cout << "Optiune invalida";
-	}
+	//cout << "Alegeti evenimentul: ";
+	//int optiune;
+	//cin >> optiune;
+	//if (optiune == 1) {
+	//	Bilet b(ev0);
+	//	cin >> b;
+	//	cout << b;
+	//	ev0.rezervareLoc(b.getNrZona(), b.getRand(), b.getLoc());
+	//	cout << ev0;
+	//}
+	//else if (optiune == 2) {
+	//	Bilet b(ev1);
+	//	cin >> b;
+	//	cout << b;
+	//	ev1.rezervareLoc(b.getNrZona(), b.getRand(), b.getLoc());
+	//	cout << ev1;
+	//}
+	//else if (optiune == 3) {
+	//	Bilet b(ev2);
+	//	cin >> b;
+	//	cout << b;
+	//	ev2.rezervareLoc(b.getNrZona(), b.getRand(), b.getLoc());
+	//	cout << ev2;
+	//}
+	//else {
+	//	cout << "Optiune invalida";
+	//}
 
-	cout << "Introduceti evenimentul" << endl;
-	Eveniment ev;
-	cin >> ev;
-	cout << Eveniment::getNrEvenimente() << endl;
+	//cout << "Introduceti evenimentul" << endl;
+	//Eveniment ev;
+	//cin >> ev;
+	//cout << Eveniment::getNrEvenimente() << endl;
+
+	//Locuri l1(12, 10);
+	//Locuri l2;
+	//l2 = l1;
+	//cout << l2;
+	Meniu m("evenimente.txt");
+	//Bilet b(ev0);
+	//cin >> b;
+	//m.adaugaBiletFisierBinar(b);
+	////cout << b;
+	//cout << endl;
+	//cout << "===========================================";
+	//cout << endl;
+	//m.citesteBileteleFisierBinar();
+	////m.afisareBilete();
+	//m.adaugaEvenimentFisierText(ev2);
+	//m.adaugaEvenimentFisierText(ev1);
+	//m.adaugaEvenimentFisierText(ev0);
+	cout << m.getNrEvenimente() << endl;
+	m.afisareEvenimente();
+	
 	return 0;
 }

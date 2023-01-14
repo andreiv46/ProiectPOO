@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <fstream>
 using namespace std;
 class Locuri
 {
@@ -19,6 +20,7 @@ public:
 	void setNrLocuri(int nrLocuri);
 	bool** getLocuri() const;
 	void setLocuri(bool** locuriCopie, int nrRanduri, int nrLocuri);
+	void setLocuri(int nrRanduri, int nrLocuri);
 	void rezervaLoc();
 	int numarLocuriTotal() const;
 	int numarLocuriDisponibile() const;

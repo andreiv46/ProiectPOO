@@ -132,6 +132,8 @@
     <ClCompile Include="Locatie.cpp" />
     <ClCompile Include="Locuri.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Meniu.cpp" />
+    <ClCompile Include="MeniuUser.cpp" />
     <ClCompile Include="Zona.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +141,8 @@
     <ClInclude Include="Eveniment.h" />
     <ClInclude Include="Locatie.h" />
     <ClInclude Include="Locuri.h" />
+    <ClInclude Include="Meniu.h" />
+    <ClInclude Include="MeniuUser.h" />
     <ClInclude Include="Zona.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

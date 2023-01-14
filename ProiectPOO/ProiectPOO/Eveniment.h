@@ -2,6 +2,7 @@
 #pragma warning(disable:4996)
 #include "Locatie.h"
 #include <iostream>
+#include <fstream>
 #include <iomanip>
 using namespace std;
 class Eveniment
@@ -27,6 +28,7 @@ public:
 	string getDurata() const;
 	void setDurata(string durata);
 	void setLocatie(const Locatie&);
+	void setIdEveniment(int idEveniment);
 	int getNrZone() const;
 	void afisareZona(int index) const;
 	int getNrRanduri(int index) const;
@@ -51,6 +53,8 @@ public:
 	friend class Locatie;
 	friend class Locuri;
 	friend class Bilet;
+	friend class Meniu;
+	void adaugaEvenimentInFisierText(string numeFisier) const;
 };
 
 

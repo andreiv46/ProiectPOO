@@ -30,22 +30,18 @@ Locuri& Locuri::operator=(const Locuri& l)
 {
 	if (this != &l)
 	{
-		if (this->locuri != nullptr){
+		if (this->locuri != nullptr)
 			for (int i = 0; i < this->nrRanduri; i++)
 				delete[] this->locuri[i];
-			delete[] this->locuri;
-		}
+		delete[] this->locuri;
 		this->nrRanduri = l.nrRanduri;
 		this->nrLocuri = l.nrLocuri;
-		if (this->nrRanduri > 0 && this->nrLocuri > 0) {
-			this->locuri = new bool* [l.nrRanduri];
-			for (int i = 0; i < l.nrRanduri; i++) {
-				this->locuri[i] = new bool[l.nrLocuri];
-				for (int j = 0; j < l.nrLocuri; j++)
-					this->locuri[i][j] = l.locuri[i][j];
-			}
+		this->locuri = new bool* [l.nrRanduri];
+		for (int i = 0; i < l.nrRanduri; i++) {
+			this->locuri[i] = new bool[l.nrLocuri];
+			for (int j = 0; j < l.nrLocuri; j++)
+				this->locuri[i][j] = l.locuri[i][j];
 		}
-		else this->locuri = nullptr;
 	}
 	return *this;
 }
@@ -55,6 +51,7 @@ Locuri::~Locuri()
 		for (int i = 0; i < this->nrRanduri; i++)
 			delete[] this->locuri[i];
 		delete[] this->locuri;
+		this->locuri = nullptr;
 	}
 }
 int Locuri::getNrRanduri() const
@@ -139,6 +136,22 @@ void Locuri::setLocuri(bool** locuriCopie, int nrRanduri, int nrLocuri) {
 			for (int j = 0; j < this->nrLocuri; j++)
 				this->locuri[i][j] = locuriCopie[i][j];
 		}
+	}
+}
+void Locuri::setLocuri(int nrRanduri, int nrLocuri) {
+	if (this->locuri != nullptr) {
+		for (int i = 0; i < this->nrRanduri; i++) {
+			delete[] this->locuri[i];
+		}
+		delete[] this->locuri;
+	}
+	this->nrRanduri = nrRanduri;
+	this->nrLocuri = nrLocuri;
+	this->locuri = new bool* [this->nrRanduri];
+	for (int i = 0; i < this->nrRanduri; i++) {
+		this->locuri[i] = new bool[this->nrLocuri];
+		for (int j = 0; j < this->nrLocuri; j++)
+			this->locuri[i][j] = false;
 	}
 }
 void Locuri::rezervaLoc() {

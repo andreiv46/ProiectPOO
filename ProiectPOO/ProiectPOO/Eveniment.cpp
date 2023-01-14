@@ -19,7 +19,8 @@ Eveniment::Eveniment(const char* denumireEveniment, string data, string oraIncep
 	this->oraIncepere = oraIncepere;
 	this->durata = durata;
 	this->locatie = locatie;
-	this->idEveniment = ++nrEvenimente;
+	this->idEveniment = idEveniment;
+	nrEvenimente++;
 }
 Eveniment::Eveniment(const Eveniment& e) {
 	this->denumireEveniment = new char[strlen(e.denumireEveniment) + 1];
@@ -269,6 +270,29 @@ string Eveniment::getCelMaiMicPret(const Eveniment* evenimente, int nrEvenimente
 	}
 	else
 		return "Nu exista evenimente";
+}
+void Eveniment::setIdEveniment(int idEveniment) {
+	this->idEveniment = idEveniment;
+}
+void Eveniment::adaugaEvenimentInFisierText(string numeFisier) const{
+	ofstream fout(numeFisier, ios::app);
+	fout << this->idEveniment << endl;
+	fout << this->denumireEveniment << endl;
+	fout << this->data << endl;
+	fout << this->oraIncepere << endl;
+	fout << this->durata << endl;
+	fout << this->locatie.getOras() << endl;
+	fout << this->locatie.getStrada() << endl;
+	fout << this->locatie.getNrZone() << endl;
+	fout << this->locatie.getCapacitateTotala() << endl;
+	for (int i = 0; i < this->locatie.getNrZone(); i++) {
+		fout << this->locatie.zone[i].getNumeZona() << endl;
+		fout << this->locatie.zone[i].getNrRanduri() << endl;
+		fout << this->locatie.zone[i].getNrLocuri() << endl;
+		fout << this->locatie.zone[i].getPretBilet() << endl;
+	}
+	fout << this->locatie.getDenumireLocatie() << endl;
+	fout.close();
 }
 
 

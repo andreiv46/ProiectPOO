@@ -10,6 +10,13 @@ Zona::Zona(string numeZona, float pretBilet, const Locuri& locuri) :Zona() {
 		this->pretBilet = pretBilet;
 	this->locuri = locuri;
 }
+Zona::Zona(string numeZona, float pretBilet, int nrRanduri, int nrLocuri) :Zona() {
+	if (numeZona.length() > 0)
+		this->numeZona = numeZona;
+	if (pretBilet > 0)
+		this->pretBilet = pretBilet;
+	locuri.setLocuri(nrRanduri, nrLocuri);
+}
 Zona::Zona(const Locuri& locuri) :Zona() {
 	this->locuri = locuri;
 }
@@ -98,5 +105,9 @@ Zona& Zona::operator--() {
 Zona::operator int() {
 	return this->pretBilet;
 }
-
+Zona::~Zona() {
+	this->numeZona = "";
+	this->pretBilet = 0;
+	this->locuri.~Locuri();
+}
 

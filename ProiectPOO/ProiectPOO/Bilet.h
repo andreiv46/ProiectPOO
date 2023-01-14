@@ -18,6 +18,7 @@ private:
 public:
 	Bilet();
 	Bilet(string numeClient, string prenumeClient, const Eveniment& eveniment, int rand, int loc, int nrZona, int idBilet);
+	Bilet(string numeClient, string prenumeClient, int rand, int loc, int nrZona, int dimensiuneUID, int* UID, int idBilet);
 	Bilet(const Eveniment& eveniment);
 	Bilet(const Bilet&);
 	~Bilet();
@@ -25,7 +26,7 @@ public:
 	friend ostream& operator<<(ostream&, const Bilet&);
 	friend istream& operator>>(istream&, Bilet&);
 	friend class Locuri;
-	int getNrBilete() const;
+	static int getNrBilete();
 	int getRand() const;
 	int getLoc() const;
 	int getNrZona() const;
@@ -39,7 +40,8 @@ public:
 	bool verificaUID(string UID) const;
 	void setNumeClient(string numeClient);
 	void setPrenumeClient(string prenumeClient);
-	bool checkData();
+	//bool checkData();
+	friend class Meniu;
 	//float getPretBilet() const;
 };
 

@@ -33,6 +33,12 @@
     <ClCompile Include="Zona.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Meniu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MeniuUser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Locatie.h">
@@ -48,6 +54,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Zona.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Meniu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MeniuUser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -13,6 +13,7 @@ private:
 public:
 	Zona();
 	Zona(string numeZona, float pretBilet, const Locuri& locuri);
+	Zona(string numeZona, float pretBilet, int nrRanduri, int nrLocuri);
 	Zona(const Locuri& locuri);
 	Zona(const Zona& z);
 	string getNumeZona() const;
@@ -28,10 +29,12 @@ public:
 	Zona& operator=(const Zona&);
 	friend ostream& operator<<(ostream&, const Zona&);
 	friend istream& operator>>(istream&, Zona&);
+	friend ofstream& operator<<(ofstream&, const Zona&);
 	Zona& operator--();
 	operator int();
 	friend class Locuri;
 	int numarLocuriZona() const;
 	Zona& operator++();
+	~Zona();
 };
 

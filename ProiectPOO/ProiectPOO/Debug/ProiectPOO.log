@@ -1,2 +1,6 @@
-﻿  Eveniment.cpp
+﻿  Meniu.cpp
+D:\Github\ProiectPOO\ProiectPOO\ProiectPOO\Meniu.cpp(119,20): warning C4018: '<': signed/unsigned mismatch
+  MeniuUser.cpp
+  main.cpp
+  Generating Code...
   ProiectPOO.vcxproj -> D:\Github\ProiectPOO\ProiectPOO\Debug\ProiectPOO.exe

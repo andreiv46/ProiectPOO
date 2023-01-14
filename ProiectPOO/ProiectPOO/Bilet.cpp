@@ -9,6 +9,20 @@ Bilet::Bilet() :idBilet(++nrBilete)
 	this->UID = nullptr;
 	this->dimensiuneUID = 0;
 }
+Bilet::Bilet(string numeClient, string prenumeClient, int rand, int loc, int nrZona, int dimensiuneUID, int* UID, int idBilet) :idBilet(idBilet)
+{
+	this->numeClient = numeClient;
+	this->prenumeClient = prenumeClient;
+	this->rand = rand;
+	this->loc = loc;
+	this->nrZona = nrZona;
+	this->dimensiuneUID = dimensiuneUID;
+	this->UID = new int[dimensiuneUID];
+	for (int i = 0; i < dimensiuneUID; i++) {
+		this->UID[i] = UID[i];
+	}
+	nrBilete++;
+}
 Bilet::Bilet(string numeClient, string prenumeClient,const Eveniment& eveniment, int rand, int loc, int nrZona, int idBilet):idBilet(idBilet)
 {
 	this->numeClient = numeClient;
@@ -39,6 +53,7 @@ Bilet::Bilet(const Bilet& b):idBilet(b.idBilet)
 	this->UID = new int[this->dimensiuneUID];
 	for (int i = 0; i < this->dimensiuneUID; i++)
 		this->UID[i] = b.UID[i];
+	//this->nrBilete++;
 }
 Bilet& Bilet::operator=(const Bilet& b)
 {
@@ -62,6 +77,7 @@ Bilet& Bilet::operator=(const Bilet& b)
 	return *this;
 }
 ostream& operator<<(ostream& out, const Bilet& bilet) {
+	out << endl;
 	out << "=============================" << endl;
 	out << "Biletul cu id-ul: " << bilet.idBilet << endl;
 	out <<"Numele: " << bilet.numeClient << " " << bilet.prenumeClient << endl;
@@ -76,7 +92,7 @@ ostream& operator<<(ostream& out, const Bilet& bilet) {
 	//out << bilet.eveniment << endl;
 	return out;
 }
-int Bilet::getNrBilete() const{
+int Bilet::getNrBilete() {
 	return nrBilete;
 }
 istream& operator>>(istream& in, Bilet& bilet) {
@@ -182,6 +198,7 @@ Bilet::~Bilet() {
 		delete[] this->UID;
 		this->UID = nullptr;
 	}
+	this->nrBilete--;
 }
 int Bilet::getdimensiuneUID() const {
 	return this->dimensiuneUID;
@@ -212,6 +229,7 @@ void Bilet::setNumeClient(string numeClient) {
 void Bilet::setPrenumeClient(string prenumeClient) {
 	this->prenumeClient = prenumeClient;
 }
+
 
 
 
