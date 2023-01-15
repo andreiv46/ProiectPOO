@@ -211,6 +211,8 @@ void DateAdmin::afisareEvenimenteUser() const{
 	}
 }
 void DateAdmin::afisareDetaliiEveniment() {
+	afisareEvenimenteUser();
+	cout << endl;
 	cout << "Introduceti id-ul evenimentului: ";
 	int idEveniment;
 	cin >> idEveniment;

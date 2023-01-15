@@ -223,6 +223,7 @@ float Eveniment::getPreturiEveniment(int index) {
 }
 void Eveniment::afisareZone() {
 	for (int i = 0; i < locatie.nrZone; i++) {
+		cout << "Zona " << i + 1 << endl;
 		cout << locatie.zone[i] << endl;
 	}
 }
