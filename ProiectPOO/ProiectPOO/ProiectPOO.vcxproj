@@ -135,19 +135,19 @@
     <ClCompile Include="DateAdmin.cpp" />
     <ClCompile Include="DateUser.cpp" />
     <ClCompile Include="MeniuAdmin.cpp" />
-    <ClCompile Include="MeniuClientStudent.cpp" />
+    <ClCompile Include="MeniuClient.cpp" />
     <ClCompile Include="Zona.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bilet.h" />
     <ClInclude Include="Eveniment.h" />
-    <ClInclude Include="IDiscount.h" />
+    <ClInclude Include="IOptiuneMeniu.h" />
     <ClInclude Include="Locatie.h" />
     <ClInclude Include="Locuri.h" />
     <ClInclude Include="DateAdmin.h" />
     <ClInclude Include="DateUser.h" />
     <ClInclude Include="MeniuAdmin.h" />
-    <ClInclude Include="MeniuClientStudent.h" />
+    <ClInclude Include="MeniuClient.h" />
     <ClInclude Include="Zona.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

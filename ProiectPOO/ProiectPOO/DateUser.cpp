@@ -5,7 +5,7 @@ void DateUser::rezervaBilet() {
 	cout << "==========================" << endl;
 	cout << "     REZERVARE BILET      " << endl;
 	cout << "==========================" << endl;
-	cout << "Alegeti evenimentul: ";
+	cout << "Introduceti id-ul evenimentul: ";
 	int optiune;
 	cin >> optiune;
 	if (this->checkExistEveniment(optiune)) {

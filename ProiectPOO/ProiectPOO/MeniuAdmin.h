@@ -1,11 +1,12 @@
 #pragma once
 #include "DateAdmin.h"
-class MeniuAdmin
+#include "IOptiuneMeniu.h"
+class MeniuAdmin: public IOptiuneMeniu
 {
 private:
 	DateAdmin *date;
 public:
-	void optiune();
+	void optiuni();
 	MeniuAdmin(string numeFisier);
 	MeniuAdmin& operator=(const MeniuAdmin& m);
 	MeniuAdmin(const MeniuAdmin& m);

@@ -4,6 +4,7 @@
 #include <fstream>
 #include <vector>
 #include <map>
+#include <iomanip>
 #include <iterator>
 #include "Bilet.h"
 #include "Eveniment.h"
@@ -28,6 +29,7 @@ public:
 	bool checkExistEveniment(int idEveniment) const;
 	void stergeEvenimentDinFisier(int idEveniment);
 	void afisareEvenimenteUser() const;
+	void afisareDetaliiEveniment();
 	friend class Bilet;
 	friend class DateAdmin;
 	//void citesteEvenimenteleFisierText(string fisierText);

@@ -42,7 +42,7 @@
     <ClCompile Include="MeniuAdmin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MeniuClientStudent.cpp">
+    <ClCompile Include="MeniuClient.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -68,13 +68,13 @@
     <ClInclude Include="DateUser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IDiscount.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MeniuAdmin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MeniuClientStudent.h">
+    <ClInclude Include="MeniuClient.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IOptiuneMeniu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

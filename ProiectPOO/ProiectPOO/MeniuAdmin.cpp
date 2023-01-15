@@ -1,5 +1,5 @@
 #include "MeniuAdmin.h"
-void MeniuAdmin::optiune() {
+void MeniuAdmin::optiuni() {
 	cout << "==========================" << endl;
 	cout << "          WELCOME" << endl;
 	cout << "==========================" << endl;

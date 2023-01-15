@@ -296,5 +296,8 @@ void Eveniment::adaugaEvenimentInFisierText(string numeFisier) const{
 	fout << this->locatie.getDenumireLocatie() << endl;
 	fout.close();
 }
+void Eveniment::afisareEveniment() const {
+	cout << this;
+}
 
 

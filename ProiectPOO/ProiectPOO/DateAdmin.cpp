@@ -103,14 +103,14 @@ DateAdmin::DateAdmin(string fisierEvenimente) {
 			zone.clear();
 		}
 		fin.close();
-	}
-	else cout << "Nu s-a putut deschide fisierul";
-	DateAdmin::citesteBileteleFisierBinar();
-	if (bilete.size() > 0) {
-		for (size_t i = 0; i < bilete.size(); i++) {
-			evenimente[bilete[i].getEvenimentID()].rezervareLoc(bilete[i].getNrZona(), bilete[i].getRand(), bilete[i].getLoc());
+		DateAdmin::citesteBileteleFisierBinar();
+		if (bilete.size() > 0) {
+			for (size_t i = 0; i < bilete.size(); i++) {
+				evenimente[bilete[i].getEvenimentID()].rezervareLoc(bilete[i].getNrZona(), bilete[i].getRand(), bilete[i].getLoc());
+			}
 		}
 	}
+	else cout << "Nu s-a putut deschide fisierul";
 }
 int DateAdmin::getNrEvenimente() const {
 	return evenimente.size();
@@ -136,6 +136,7 @@ bool DateAdmin::checkExistEveniment(int idEveniment) const {
 	return false;
 }
 void DateAdmin::ocupaLoc(int idEveniment, string nume, string prenume) {
+	evenimente[idEveniment].afisareZone();
 	cout << "Introduceti numarul zonei: ";
 	int nrZona;
 	cin >> nrZona;
@@ -201,4 +202,16 @@ void DateAdmin::afisareEvenimenteUser() const{
 		cout << it->second.getIdEveniment();
 		cout << " - " << it->second.getDenumireEveniment() << " " << it->second.getData() << " " << it->second.getOraIncepere() << endl;
 	}
+}
+void DateAdmin::afisareDetaliiEveniment() {
+	cout << "Introduceti id-ul evenimentului: ";
+	int idEveniment;
+	cin >> idEveniment;
+	while (cin.fail() || !checkExistEveniment(idEveniment)) {
+		cin.clear();
+		cin.ignore(256, '\n');
+		cout << "Id-ul evenimentului este invalid, incercati din nou: ";
+		cin >> idEveniment;
+	}
+	cout << evenimente[idEveniment];
 }

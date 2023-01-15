@@ -46,6 +46,7 @@ public:
 	bool checkLocLiber(int index, int rand, int loc) const;
 	string getNumeZona(int index) const;
 	int getIdEveniment() const;
+	void afisareEveniment() const;
 	static int getNrEvenimente();
 	static string getCelMaiMicPret(const Eveniment* evenimente, int nrEvenimente);
 	bool operator!=(const Eveniment&);
