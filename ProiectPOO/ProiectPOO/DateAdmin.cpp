@@ -132,6 +132,7 @@ void DateAdmin::afisareEvenimente() const {
 void DateAdmin::afisareBilete() const {
 	for (size_t i = 0; i < bilete.size(); i++) {
 		cout << "Biletul " << i + 1 << endl;
+		//cout << evenimente[bilete[i].UID[bilete[i].dimensiuneUID - 1]].getDenumireEveniment() << endl;
 		cout << bilete[i];
 		cout << endl << endl;
 	}
@@ -193,7 +194,6 @@ void DateAdmin::ocupaLoc(int idEveniment, string nume, string prenume) {
 	}
 	evenimente[idEveniment].rezervareLoc(nrZona, rand, loc);
 	bilete.push_back(Bilet(nume, prenume, rand, loc, nrZona, idEveniment, evenimente[idEveniment].getPretBilet(nrZona)));
-	cout << bilete[bilete.size() - 1];
 	this->adaugaBiletFisierBinar(bilete[bilete.size() - 1]);
 	cout << endl;
 	cout << "Locul a fost rezervat cu succes" << endl;
@@ -226,7 +226,8 @@ void DateAdmin::afisareBilet(string UID) {
 	for (size_t i = 0; i < bilete.size(); i++) {
 		if (bilete[i].getUIDstring() == UID) {
 			cout << bilete[i];
-			cout << endl << "Stare bilet: valid";
+			cout << evenimente[bilete[i].UID[bilete[i].dimensiuneUID - 1]].getDenumireEveniment() << endl;
+			cout << "Stare bilet: valid" << endl;
 			return;
 		}
 	}

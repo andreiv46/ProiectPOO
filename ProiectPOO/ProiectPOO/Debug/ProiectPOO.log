@@ -1,8 +1,4 @@
-﻿  Bilet.cpp
-  DateAdmin.cpp
-  DateUser.cpp
-  MeniuAdmin.cpp
-  MeniuClient.cpp
+﻿  DateAdmin.cpp
   main.cpp
   Generating Code...
   ProiectPOO.vcxproj -> D:\Github\ProiectPOO\ProiectPOO\Debug\ProiectPOO.exe
