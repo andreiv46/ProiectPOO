@@ -12,16 +12,44 @@
 #include "MeniuAdmin.h"
 #include "MeniuClient.h"
 
-
-//------------------------------------------------TESTING------------------------------------------------
-
 int main(int argc, char** argv) {
-	
-	MeniuClient m("evenimente.txt");
-	m.optiuni();
-	//MeniuAdmin m("evenimente.txt");
-	//m.optiuni();
-	//cout << endl << Eveniment::getNrEvenimente() << endl;
-	//cout << endl << Bilet::getNrBilete() << endl;
+	string fisierTextEvenimente;
+	if(argc > 1)
+		fisierTextEvenimente = argv[1];
+	else 
+		fisierTextEvenimente = "invalid";
+	cout << "==========================" << endl;
+	cout << "      TICKETING APP       " << endl;	
+	cout << "==========================" << endl;
+	cout << "1-Meniu Admin" << endl;
+	cout << "2-Meniu Client" << endl;
+	cout << "3-Exit" << endl;
+	cout << "Introduceti optiunea: ";
+	int optiune;
+	cin >> optiune;
+	while (optiune != 3) {
+		if (!cin.fail()) {
+			if (optiune == 1) {
+				MeniuAdmin* m = new MeniuAdmin(fisierTextEvenimente);
+				m->optiuni();
+				delete m;
+			}
+			else if (optiune == 2) {
+				MeniuClient* m = new MeniuClient(fisierTextEvenimente);
+				m->optiuni();
+				delete m;
+			}
+			else
+				cout << "Optiune invalida" << endl;
+		}
+		cin.clear();
+		cin.ignore(256, '\n');
+		cout << endl;
+		cout << "1-Meniu Admin" << endl;
+		cout << "2-Meniu Client" << endl;
+		cout << "3-Exit" << endl;
+		cout << "Introduceti optiunea: ";
+		cin >> optiune;
+	}
 	return 0;
 }

@@ -20,3 +20,11 @@ void DateUser::rezervaBilet() {
 		cout << "Nu exista evenimentul cu id-ul " << optiune << endl;
 	}
 }
+void DateUser::verificaBilet() {
+	cout << "Introduceti UID-ul: ";
+	string uid;
+	cin >> uid;
+	afisareBilet(uid);
+	cout << endl;
+}
+//float DateUser::valoareTotalaBilete() {}

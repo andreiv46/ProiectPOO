@@ -8,13 +8,15 @@ Bilet::Bilet() :idBilet(++nrBilete)
 	this->loc = 0;
 	this->UID = nullptr;
 	this->dimensiuneUID = 0;
+	this->pretBilet = 0;
 }
-Bilet::Bilet(string numeClient, string prenumeClient, int rand, int loc, int nrZona, int dimensiuneUID, int* UID, int idBilet) :idBilet(idBilet)
+Bilet::Bilet(string numeClient, string prenumeClient, int rand, int loc, int nrZona, int dimensiuneUID, int* UID, int idBilet, float pretBilet) :idBilet(idBilet)
 {
 	this->numeClient = numeClient;
 	this->prenumeClient = prenumeClient;
 	this->rand = rand;
 	this->loc = loc;
+	this->pretBilet = pretBilet;
 	this->nrZona = nrZona;
 	this->dimensiuneUID = dimensiuneUID;
 	this->UID = new int[dimensiuneUID];
@@ -23,12 +25,13 @@ Bilet::Bilet(string numeClient, string prenumeClient, int rand, int loc, int nrZ
 	}
 	this->nrBilete++;
 }
-Bilet::Bilet(string numeClient, string prenumeClient, int rand, int loc, int nrZona, int idEveniment):idBilet(++nrBilete)
+Bilet::Bilet(string numeClient, string prenumeClient, int rand, int loc, int nrZona, int idEveniment, float pretBilet):idBilet(++nrBilete)
 {
 	this->numeClient = numeClient;
 	this->prenumeClient = prenumeClient;
 	this->nrZona = nrZona;
 	this->rand = rand;
+	this->pretBilet = pretBilet;
 	this->loc = loc;
 	if (this->prenumeClient.length() < 5 && this->prenumeClient.length() > 0) {
 		this->dimensiuneUID = this->prenumeClient.length() + 2;
@@ -53,6 +56,7 @@ Bilet::Bilet(const Bilet& b):idBilet(b.idBilet)
 	this->prenumeClient = b.prenumeClient;
 	this->rand = b.rand;
 	this->loc = b.loc;
+	this->pretBilet = b.pretBilet;
 	this->nrZona = b.nrZona;
 	this->dimensiuneUID = b.dimensiuneUID;
 	this->UID = new int[this->dimensiuneUID];
@@ -64,6 +68,7 @@ Bilet& Bilet::operator=(const Bilet& b)
 {
 	this->numeClient = b.numeClient;
 	this->prenumeClient = b.prenumeClient;
+	this->pretBilet = b.pretBilet;
 	this->rand = b.rand;
 	this->loc = b.loc;
 	this->nrZona = b.nrZona;
@@ -89,6 +94,8 @@ ostream& operator<<(ostream& out, const Bilet& bilet) {
 	out << "UID: ";
 	for (int i = 0; i < bilet.dimensiuneUID; i++)
 		out << bilet.UID[i];
+	out << endl;
+	out << "Pret: " << bilet.pretBilet << " lei" << endl;
 	return out;
 }
 int Bilet::getNrBilete() {
@@ -186,9 +193,6 @@ string Bilet::getNumeClient() const {
 string Bilet::getPrenumeClient() const {
 	return this->prenumeClient;
 }
-//float Bilet::operator+(const Bilet& bilet) {
-//	return this->eveniment.getPretBilet(this->nrZona) + bilet.eveniment.getPretBilet(bilet.nrZona);
-//}
 //float operator*(int i, const Bilet& bilet) {
 //	return i * bilet.eveniment.getPretBilet(bilet.nrZona);
 //}
@@ -208,9 +212,9 @@ int* Bilet::getUID() const {
 		copie[i] = this->UID[i];
 	return copie;
 }
-//Eveniment Bilet::getEveniment() const {
-//	return this->eveniment;
-//}
+float Bilet::operator+(const Bilet& bilet) {
+	return this->pretBilet + bilet.pretBilet;
+}
 bool Bilet::verificaUID(string UID) const{
 	if (UID.length() > 0) {
 		string copieUID;
@@ -233,7 +237,15 @@ int Bilet::getEvenimentID() const {
 		return this->UID[this->dimensiuneUID - 1];
 	return -1;
 }
-
+string Bilet::getUIDstring() const {
+	string UID;
+	for (int i = 0; i < this->dimensiuneUID; i++)
+		UID += to_string(this->UID[i]);
+	return UID;
+}
+float Bilet::getPretBilet() const {
+	return this->pretBilet;
+}
 
 
 

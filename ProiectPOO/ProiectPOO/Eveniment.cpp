@@ -223,7 +223,7 @@ float Eveniment::getPreturiEveniment(int index) {
 }
 void Eveniment::afisareZone() {
 	for (int i = 0; i < locatie.nrZone; i++) {
-		cout << locatie.zone[i];
+		cout << locatie.zone[i] << endl;
 	}
 }
 void Eveniment::rezervareLoc(int index, int rand, int loc) {
@@ -298,6 +298,9 @@ void Eveniment::adaugaEvenimentInFisierText(string numeFisier) const{
 }
 void Eveniment::afisareEveniment() const {
 	cout << this;
+}
+string Eveniment::getOras() const {
+	return this->locatie.oras;
 }
 
 

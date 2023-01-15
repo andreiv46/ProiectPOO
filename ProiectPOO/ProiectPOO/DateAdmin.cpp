@@ -1,6 +1,6 @@
 #include "DateAdmin.h"
 DateAdmin::DateAdmin() {
-	this->fisierEvenimente = "";
+	this->fisierEvenimente = "invalid";
 }
 void DateAdmin::adaugaBiletFisierBinar(const Bilet& bilet) const {
 	ofstream fout("bilete.bin", ios::out | ios::binary | ios::app);
@@ -15,19 +15,21 @@ void DateAdmin::adaugaBiletFisierBinar(const Bilet& bilet) const {
 		fout.write((char*)&bilet.loc, sizeof(int));
 		fout.write((char*)&bilet.nrZona, sizeof(int));
 		fout.write((char*)&bilet.idBilet, sizeof(int));
+		fout.write((char*)&bilet.pretBilet, sizeof(float));
 		fout.write((char*)&bilet.dimensiuneUID, sizeof(int));
 		for (int i = 0; i < bilet.dimensiuneUID; i++)
 			fout.write((char*)&bilet.UID[i], sizeof(int));
 		fout.close();
 	}
 	else
-		cout << "Nu s-a putut deschide fisierul" << endl;
+		cout << "Nu s-a putut deschide fisierul cu biletele" << endl;
 }
 void DateAdmin::citesteBileteleFisierBinar() {
 	ifstream fin("bilete.bin", ios::in | ios::binary);
 	if (fin.is_open()) {
 		string numeClientCopie, prenumeClientCopie;
 		int randCopie, locCopie, nrZonaCopie, idBiletCopie, dimensiuneUIDCopie;
+		float pretbilet;
 		int* UID = nullptr;
 		int length;
 		fin.read((char*)&length, sizeof(length));
@@ -46,19 +48,20 @@ void DateAdmin::citesteBileteleFisierBinar() {
 			fin.read((char*)&randCopie, sizeof(int)); 
 			fin.read((char*)&locCopie, sizeof(int)); 
 			fin.read((char*)&nrZonaCopie, sizeof(int));		
-			fin.read((char*)&idBiletCopie, sizeof(int)); ;
+			fin.read((char*)&idBiletCopie, sizeof(int));
+			fin.read((char*)&pretbilet, sizeof(float));
 			fin.read((char*)&dimensiuneUIDCopie, sizeof(int)); 
 			UID = new int[dimensiuneUIDCopie];
 			for (int i = 0; i < dimensiuneUIDCopie; i++) {
 				fin.read((char*)&UID[i], sizeof(int));
 			}
-			bilete.push_back(Bilet(numeClientCopie, prenumeClientCopie, randCopie, locCopie, nrZonaCopie, dimensiuneUIDCopie, UID, idBiletCopie));
-			Bilet test(numeClientCopie, prenumeClientCopie, randCopie, locCopie, nrZonaCopie, dimensiuneUIDCopie, UID, idBiletCopie);
+			bilete.push_back(Bilet(numeClientCopie, prenumeClientCopie, randCopie, locCopie, nrZonaCopie, dimensiuneUIDCopie, UID, idBiletCopie, pretbilet));
+			//Bilet test(numeClientCopie, prenumeClientCopie, randCopie, locCopie, nrZonaCopie, dimensiuneUIDCopie, UID, idBiletCopie);
 			fin.read((char*)&length, sizeof(length));
 		}
 		fin.close();
 	}
-	else cout << "Nu s-a putut deschide fisierul";
+	else cout << "Nu s-a putut deschide fisierul cu biletele" << endl;
 }
 void DateAdmin::adaugaEvenimentFisierText() {
 	Eveniment eveniment;
@@ -110,7 +113,10 @@ DateAdmin::DateAdmin(string fisierEvenimente) {
 			}
 		}
 	}
-	else cout << "Nu s-a putut deschide fisierul";
+	else {
+		this->fisierEvenimente = "invalid";
+		cout << "Nu s-a putut deschide fisierul cu evenimentele";
+	}
 }
 int DateAdmin::getNrEvenimente() const {
 	return evenimente.size();
@@ -186,7 +192,7 @@ void DateAdmin::ocupaLoc(int idEveniment, string nume, string prenume) {
 		}
 	}
 	evenimente[idEveniment].rezervareLoc(nrZona, rand, loc);
-	bilete.push_back(Bilet(nume, prenume, rand, loc, nrZona, idEveniment));
+	bilete.push_back(Bilet(nume, prenume, rand, loc, nrZona, idEveniment, evenimente[idEveniment].getPretBilet(nrZona)));
 	cout << bilete[bilete.size() - 1];
 	this->adaugaBiletFisierBinar(bilete[bilete.size() - 1]);
 	cout << endl;
@@ -200,7 +206,8 @@ void DateAdmin::ocupaLoc(int idEveniment, string nume, string prenume) {
 void DateAdmin::afisareEvenimenteUser() const{
 	for (auto it = evenimente.begin(); it != evenimente.end(); it++) {
 		cout << it->second.getIdEveniment();
-		cout << " - " << it->second.getDenumireEveniment() << " " << it->second.getData() << " " << it->second.getOraIncepere() << endl;
+		cout << " - " << it->second.getDenumireEveniment() << " " << it->second.getData()
+			<< " " << it->second.getOras() << " " << it->second.getOraIncepere() << endl;
 	}
 }
 void DateAdmin::afisareDetaliiEveniment() {
@@ -214,4 +221,24 @@ void DateAdmin::afisareDetaliiEveniment() {
 		cin >> idEveniment;
 	}
 	cout << evenimente[idEveniment];
+}
+void DateAdmin::afisareBilet(string UID) {
+	for (size_t i = 0; i < bilete.size(); i++) {
+		if (bilete[i].getUIDstring() == UID) {
+			cout << bilete[i];
+			cout << endl << "Stare bilet: valid";
+			return;
+		}
+	}
+	cout << endl << "Bilet invalid";
+}
+string DateAdmin::getNumeFisierEvenimente() const {
+	return this->fisierEvenimente;
+}
+float DateAdmin::valoareTotalaBilete() {
+	float suma = 0;
+	for (size_t i = 0; i < bilete.size(); i++) {
+		suma += bilete[i].getPretBilet();
+	}
+	return suma;
 }

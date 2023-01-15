@@ -6,6 +6,8 @@ public:
 	DateUser();
 	DateUser(string fisierEvenimente);
 	void rezervaBilet();
+	void verificaBilet();
+	//float valoareTotalaBilete();
 };
 
 

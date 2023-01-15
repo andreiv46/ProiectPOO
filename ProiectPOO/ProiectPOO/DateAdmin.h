@@ -22,6 +22,7 @@ public:
 	void citesteBileteleFisierBinar();
 	int getNrEvenimente() const;
 	int getNrBilete() const;
+	float valoareTotalaBilete();
 	void afisareBilete() const;
 	void adaugaEvenimentFisierText();
 	void afisareEvenimente() const;
@@ -30,8 +31,10 @@ public:
 	void stergeEvenimentDinFisier(int idEveniment);
 	void afisareEvenimenteUser() const;
 	void afisareDetaliiEveniment();
+	void afisareBilet(string UID);
+	string getNumeFisierEvenimente() const;
 	friend class Bilet;
-	friend class DateAdmin;
+	friend class MeniuAdmin;
 	//void citesteEvenimenteleFisierText(string fisierText);
 	//~DateAdmin();
 };
